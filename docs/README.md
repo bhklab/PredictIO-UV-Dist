@@ -2,7 +2,7 @@
 
 **Authors:** [Farnoosh Abbas Aghababazadeh](https://github.com/RibaA)
 
-**Contact:** [bhklabfarnooshbabazadeh@gmail.com](mailto:bhklabfarnooshbabazadeh@gmail.com)
+**Contact:** [bhklab.farnooshabbasaghababazadeh@gmail.com](mailto:bhklab.farnooshabbasaghababazadeh@gmail.com)
 
 **Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.
 
@@ -12,11 +12,11 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=flat-square)](https://github.com/astral-sh/ruff)
 [![Built with Material for MkDocs](https://img.shields.io/badge/mkdocs--material-gray?logo=materialformkdocs&style=flat-square)](https://github.com/squidfunk/mkdocs-material)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/bhklab/distributed-uv-dist?style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/bhklab/distributed-uv-dist?style=flat-square)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/bhklab/distributed-uv-dist?style=flat-square)
-![GitHub contributors](https://img.shields.io/github/contributors/bhklab/distributed-uv-dist?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bhklab/distributed-uv-dist?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/bhklab/predictio-uv-dist?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/bhklab/predictio-uv-dist?style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/bhklab/predictio-uv-dist?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/bhklab/predictio-uv-dist?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bhklab/predictio-uv-dist?style=flat-square)
 
 ## Set Up
 
@@ -37,4 +37,4 @@ pixi install
 
 ## Documentation
 
-Click [here](https://bhklab.github.io/distributed-uv-dist) to view the full documentation.
+Click [here](https://bhklab.github.io/predictio-uv-dist) to view the full documentation.

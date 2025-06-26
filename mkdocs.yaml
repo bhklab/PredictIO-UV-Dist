@@ -1,6 +1,6 @@
 site_name: Distributed univariable predictive modelling for Immuno-Oncology response
-repo_url: https://github.com/bhklab/distributed-uv-dist
-repo_name: distributed-uv-dist
+repo_url: https://github.com/bhklab/predictio-uv-dist
+repo_name: predictio-uv-dist
 site_description: Package documentation for Distributed univariable predictive modelling for Immuno-Oncology response
 site_author: Farnoosh Abbas Aghababazadeh
 
@@ -31,4 +31,4 @@ plugins:
     - include-markdown                  # allows for including Markdown files into another Markdown file
 
 extra:
-    homepage: https://bhklab.github.io/distributed-uv-dist
+    homepage: https://bhklab.github.io/predictio-uv-dist

@@ -1,7 +1,7 @@
 [workspace]
-name = "distributed-uv-dist"
+name = "predictio-uv-dist"
 authors = [
-    "Farnoosh Abbas Aghababazadeh <bhklabfarnooshbabazadeh@gmail.com>"
+    "Farnoosh Abbas Aghababazadeh <bhklab.farnooshabbasaghababazadeh@gmail.com>"
 ]
 description = "A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data."
 license = "MIT"
