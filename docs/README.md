@@ -1,0 +1,40 @@
+# Distributed univariable predictive modelling for Immuno-Oncology response
+
+**Authors:** [Farnoosh Abbas Aghababazadeh](https://github.com/RibaA)
+
+**Contact:** [bhklabfarnooshbabazadeh@gmail.com](mailto:bhklabfarnooshbabazadeh@gmail.com)
+
+**Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.
+
+--------------------------------------
+
+[![pixi-badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json&style=flat-square)](https://github.com/prefix-dev/pixi)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=flat-square)](https://github.com/astral-sh/ruff)
+[![Built with Material for MkDocs](https://img.shields.io/badge/mkdocs--material-gray?logo=materialformkdocs&style=flat-square)](https://github.com/squidfunk/mkdocs-material)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/bhklab/distributed-uv-dist?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/bhklab/distributed-uv-dist?style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/bhklab/distributed-uv-dist?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/bhklab/distributed-uv-dist?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bhklab/distributed-uv-dist?style=flat-square)
+
+## Set Up
+
+### Prerequisites
+
+Pixi is required to run this project.
+If you haven't installed it yet, [follow these instructions](https://pixi.sh/latest/)
+
+### Installation
+
+1. Clone this repository to your local machine
+2. Navigate to the project directory
+3. Set up the environment using Pixi:
+
+```bash
+pixi install
+```
+
+## Documentation
+
+Click [here](https://bhklab.github.io/distributed-uv-dist) to view the full documentation.

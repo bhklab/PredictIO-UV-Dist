@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier
+_commit: v0.14.1
+_src_path: gh:bhklab/bhklab-project-template
+author_email: bhklabfarnooshbabazadeh@gmail.com
+author_full_name: Farnoosh Abbas Aghababazadeh
+github_username: RibaA
+has_additional_authors: false
+project_description: A distributed framework for univariable predictive modeling of
+    Immuno-Oncology (IO) response, enabling analysis across multiple centers without
+    sharing patient-level data.
+project_name: Distributed univariable predictive modelling for Immuno-Oncology response
+project_slug: distributed-uv-dist
+publish_to_github: true
+python_version: '3.12'
+repo_location: bhklab
