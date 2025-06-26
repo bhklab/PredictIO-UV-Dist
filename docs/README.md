@@ -2,7 +2,7 @@
 
 **Authors:** [Farnoosh Abbas Aghababazadeh](https://github.com/RibaA)
 
-**Contact:** [bhklab.farnooshabbasaghababazadeh@gmail.com](mailto:bhklab.farnooshabbasaghababazadeh@gmail.com)
+**Contact:** [farnoosh.abbasaghababazadeh@uhn.ca](mailto:farnoosh.abbasaghababazadeh@uhn.ca)
 
 **Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.
 
