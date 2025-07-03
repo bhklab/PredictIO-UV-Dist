@@ -32,7 +32,7 @@ This document describes all **Immuno-Oncology (IO)** and **RNA-based signature**
 
 | Variable            | Description                                       | Format   | Example      |
 |---------------------|---------------------------------------------------|----------|--------------|
-| patientid           | Unique TCGA barcode                               | string   | TCGA-2H-A9GF |
+| patientid           | Unique patient identifier                         | string   | GSE12345_P01 |
 | age                 | Age at diagnosis                                  | integer  | 63           |
 | sex                 | Biological sex                                    | factor   | M/F          |
 | cancer_type         | Primary cancer type                               | string   | Melanoma     |
