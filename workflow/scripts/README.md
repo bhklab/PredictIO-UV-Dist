@@ -2,12 +2,14 @@
 
 ## Purpose
 
-This directory contains **modular R scripts** used across the distributed univariable modeling pipeline for Immuno-Oncology (IO) therapy outcomes. These scripts enable:
+This directory contains modular, reusable R scripts that support the distributed univariable analysis framework for Immuno-Oncology (IO) outcome modeling. These scripts are designed to be executed locally at each participating center and centrally during meta-analysis.
 
-- Local univariable signature association with IO outcomes at each data-contributing center
-- Summary statistic extraction and export
-- Meta-analysis integration at a central node
-- Visualization of distributed analysis outputs
+They cover:
+
+- Computing univariable associations between gene expression signatures and IO outcomes at each site
+- Exporting summary statistics in a privacy-preserving format
+- Aggregating and meta-analyzing results at a central integration node
+- Visualizing integrated findings to support biomarker discovery
 
 ## Key Scripts (Refer to `workflow/scripts`)
 
