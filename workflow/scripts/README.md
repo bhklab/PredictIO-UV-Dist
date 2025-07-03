@@ -2,26 +2,37 @@
 
 ## Purpose
 
-This directory contains modular, reusable R scripts that support the distributed univariable analysis framework for Immuno-Oncology (IO) outcome modeling. These scripts are designed to be executed locally at each participating center and centrally during meta-analysis.
+This directory contains modular, reusable R scripts designed for a distributed, privacy-preserving analysis pipeline to evaluate univariable associations between molecular signatures and Immuno-Oncology (IO) therapy outcomes across multiple centers.
 
-They cover:
+These scripts support:
 
-- Computing univariable associations between gene expression signatures and IO outcomes at each site
-- Exporting summary statistics in a privacy-preserving format
-- Aggregating and meta-analyzing results at a central integration node
-- Visualizing integrated findings to support biomarker discovery
+- Local univariable modeling at each participating center
+- Extraction of summary statistics (no raw or sensitive patient data sharing)
+- Central meta-analysis across all centers at a central integration node
+- Visualization of integrated findings for reporting and interpretation
 
 ## Key Scripts (Refer to `workflow/scripts`)
 
-- `runSigAnalysis.R`: Performs univariable analysis per center using site-specific config
-- `runMetaAnalysis.R`: Merges and meta-analyzes results from all centers
-- `visualization.R`: Generates plots such as forest plots, volcano plots, and heatmaps based on integrated results
-- `main.nf`: Orchestration script for distributed execution using Nextflow
+- `runSigAnalysis.R`: Executes local univariable analysis per center. Computes signature scores (e.g., GSVA, weighted mean, IPS) and tests associations with outcomes such as OS, PFS, and response.
+- `runMetaAnalysis.R`: Aggregates outputs from all centers and performs meta-analysis (fixed/random effects), multiple testing correction, and harmonization.
+- `visualization.R`: Generates forest plots, volcano plots, and heatmaps from the integrated results to highlight reproducible and center-specific associations.
+- `main.nf`: Nextflow orchestration pipeline for distributed, parallel execution of local analyses and aggregation workflows.
 
-## Data References
+## Data Inputs and Signature Library
 
-When scripts access data:
+The pipeline is designed to support multiple data modalities across centers:
 
-- Use command-line arguments or configuration files for file paths
-- Document in `docs/data_sources.md` which scripts use which data sources
-- Consider using symbolic links for consistent references across environments
+- **Gene expression matrix**: Typically log2(TPM) RNA-seq or normalized microarray data.
+- **Clinical variables**: OS (overall survival), PFS (progression-free survival), binary response.
+- **Signatures**: A curated library of immune-relevant gene signatures (e.g., IFN-γ, TIS, IPS) loaded from TBD
+
+Each center should:
+
+1. Place data in /data/<CENTER_NAME>/
+2. Provide center-specific configuration in config/<center_config>.yaml, specifying:
+
+- Study name (e.g., ICB_Gide)
+- Cancer type (e.g., Melanoma)
+- Treatment class (e.g., PD-1)
+- Input paths and signature set
+
