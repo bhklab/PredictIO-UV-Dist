@@ -60,7 +60,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#patient-summary-table">Patient Summary Table</a>
+    <li class="toctree-l2"><a class="reference internal" href="#key-clinical-variables">Key Clinical Variables</a>
     </li>
     </ul>
                 </li>
@@ -116,7 +116,7 @@
 <li><strong>Citation</strong>: <a href="https://pubmed.ncbi.nlm.nih.gov/36055464/">Bareche, Y., Kelly, D., Abbas-Aghababazadeh, F. et al., Annals of Oncology 2022</a></li>
 </ul>
 <hr />
-<h2 id="patient-summary-table">Patient Summary Table</h2>
+<h2 id="key-clinical-variables">Key Clinical Variables</h2>
 <table>
 <thead>
 <tr>
@@ -128,7 +128,7 @@
 </thead>
 <tbody>
 <tr>
-<td>patient_id</td>
+<td>patientid</td>
 <td>Unique TCGA barcode</td>
 <td>string</td>
 <td>TCGA-2H-A9GF</td>
@@ -152,19 +152,61 @@
 <td>Melanoma</td>
 </tr>
 <tr>
-<td>treatment_type</td>
+<td>histo</td>
 <td>IO therapy category</td>
 <td>string</td>
 <td>PD-1</td>
 </tr>
 <tr>
-<td>os_time_months</td>
+<td>treatment_type</td>
+<td>IO therapy category</td>
+<td>string</td>
+<td>PD-1/PD-L1</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>Overall survival event (1 = death)</td>
+<td>binary</td>
+<td>1</td>
+</tr>
+<tr>
+<td>recist</td>
+<td>Overall survival event (1 = death)</td>
+<td>binary</td>
+<td>1</td>
+</tr>
+<tr>
+<td>response</td>
+<td>IO therapy category</td>
+<td>string</td>
+<td>PD-1</td>
+</tr>
+<tr>
+<td>survival_time_os</td>
 <td>Overall survival time (months)</td>
 <td>numeric</td>
 <td>21.3</td>
 </tr>
 <tr>
-<td>os_status</td>
+<td>event_occurred_os</td>
+<td>Overall survival event (1 = death)</td>
+<td>binary</td>
+<td>1</td>
+</tr>
+<tr>
+<td>survival_time_pfs</td>
+<td>Overall survival time (months)</td>
+<td>numeric</td>
+<td>21.3</td>
+</tr>
+<tr>
+<td>event_occurred_pfs</td>
+<td>Overall survival event (1 = death)</td>
+<td>binary</td>
+<td>1</td>
+</tr>
+<tr>
+<td>survival_unit</td>
 <td>Overall survival event (1 = death)</td>
 <td>binary</td>
 <td>1</td>
