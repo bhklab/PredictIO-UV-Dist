@@ -1,0 +1,42 @@
+# Configuration file for distributed univariable pipeline
+
+# Study metadata
+study_id: "ICB_Gide"
+cancer_type: "Melanoma"
+treatment_type: "PD-1/PD-L1"
+
+# Input paths (adjust for each center)
+input_data_path: "/data/ICB_Gide/"   # Directory containing RData file
+output_dir: "data/results/"
+
+# Expression and signature objects (inside loaded RData file)
+expression_object: "dat$ICB"
+signature_object: "dat$signature"
+signature_info_object: "dat$sig.info"
+
+# Signature scoring parameters
+signature_scoring:
+  missing_threshold: 0.5
+  constant_offset: 0.001
+  gene_cutoff: 15
+  coverage: 0.8
+
+# Survival analysis
+survival:
+  os_censor_time: 36
+  pfs_censor_time: 24
+  min_samples: 15
+
+
+# Logistic regression analysis
+logreg:
+  min_class_0: 3
+  min_class_1: 3
+
+# Output filenames (automatically prefixed by study_id)
+output_files:
+  scores: "sig_score.rda"
+  correlation: "sig_pcor.rda"
+  survival_os: "sig_os.rda"
+  survival_pfs: "sig_pfs.rda"
+  logreg_response: "sig_logreg.rda"
