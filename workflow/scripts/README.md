@@ -2,40 +2,31 @@
 
 ## Purpose
 
-This directory contains **reusable code scripts** for:
+This directory contains **modular R scripts** used across the distributed univariable modeling pipeline for Immuno-Oncology (IO) therapy outcomes. These scripts enable:
 
-- Data processing pipelines
-- Analysis workflows
-- Utility functions
-- Automation tasks
+- Local univariable signature association with IO outcomes at each data-contributing center
+- Summary statistic extraction and export
+- Meta-analysis integration at a central node
+- Visualization of distributed analysis outputs
 
-## Best Practices for Scripts
+## Key Scripts (Refer to `workflow/scripts`)
 
-For maximum usability, scripts should:
+### Analysis Scripts (`/scripts/analysis/`)
+- `local_analysis.R`: Performs univariable analysis per center using site-specific config
+- `aggregate_results.R`: Merges and meta-analyzes results from all centers
+- `meta_utils.R`: Helper functions for statistical aggregation (fixed/random effects)
+- `validate_inputs.R`: Harmonization and QC of center-provided data (optional)
+- `nextflow_pipeline.nf`: Optional orchestration script for distributed execution using Nextflow
 
-- Include a detailed docstring/header explaining purpose, inputs, outputs
-- Contain inline comments for complex logic
-- Be modular and follow the single responsibility principle
-- Include proper error handling and logging
-- Have command-line interfaces when appropriate
+### Visualization Scripts (`/scripts/visualization/`)
+- `visualization.Rmd`: Generates plots such as forest plots, volcano plots, and heatmaps based on integrated results
 
-## Git Synchronization
 
-Scripts **ARE tracked in Git** and represent the core reproducible components of your analysis. Ensure scripts:
-
-- Are well-tested before committing
-- Have clear versioning (consider semantic versioning)
-- Include usage examples in comments or separate documentation
-
-## Organization Recommendations
-
-Consider organizing scripts by their function:
+## Folder Structure (if extended)
 
 ```console
-/scripts/preprocessing/
 /scripts/analysis/
 /scripts/visualization/
-/scripts/utilities/
 ```
 
 ## Data References
@@ -45,27 +36,3 @@ When scripts access data:
 - Use command-line arguments or configuration files for file paths
 - Document in `docs/data_sources.md` which scripts use which data sources
 - Consider using symbolic links for consistent references across environments
-
-## Documentation Requirement
-
-It is **highly recommended** to convert scripts to CLI tools using popular libraries
-like `click` or `typer`, which can make them more user-friendly and easier to document.
-
-```console
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-script_name.py
-Usage: script_name.py [options] <input> <output>
-
-Arguments:
-    input     Description of input
-    output    Description of output
-
-Options:
-    -h --help     Show this help
-    -v --verbose  Verbose output
-"""
-```
-
-Remember that well-documented scripts are essential for reproducible research and enable others to understand and build upon your work!
