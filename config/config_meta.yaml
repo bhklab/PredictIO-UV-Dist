@@ -1,0 +1,33 @@
+# Configuration file for distributed univariable pipeline
+
+input_dir: "/data"
+output_dir: "/results"
+
+file_suffixes:
+  correlation: "_pcor.rda"
+  score: "_score.rda"
+  os: "_os.rda"
+  pfs: "_pfs.rda"
+  logreg: "_logreg.rda"
+
+meta_analysis:
+  min_studies: 3
+  correction_method: "BH"
+
+heatmap:
+  output_file: "Heatmap_pan.jpeg"
+  fdr_threshold: 0.05
+  pval_threshold: 0.05
+  colors:
+    neg: ["#2166AC", "#4393C3", "#92C5DE", "#D1E5F0"]
+    pos: ["#F7F7F7", "#FDDBC7", "#F4A582", "#D6604D", "#B2182B"]
+    annotation:
+      FDR: "#4A7169FF"
+      Pvalue: "#9AA582FF"
+      NS: "#d9d9d9"
+
+forestplot:
+  gene: "IRG_Ayers"
+  output_file: "IRG_Ayers_os_pan.jpeg"
+  label: "logHR"
+  xlab: "logHR estimate"
