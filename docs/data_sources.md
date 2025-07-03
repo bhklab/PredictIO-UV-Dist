@@ -28,9 +28,7 @@ This document describes all **Immuno-Oncology (IO)** and **RNA-based signature**
 ---
 
 
----
-
-## 👥 Patient Summary Table
+## Patient Summary Table
 
 | Variable         | Description                            | Format      | Example        |
 |------------------|----------------------------------------|-------------|----------------|
