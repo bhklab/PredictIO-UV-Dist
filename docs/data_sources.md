@@ -40,7 +40,7 @@ This document describes all **Immuno-Oncology (IO)** and **RNA-based signature**
 | treatment_type      | IO therapy category                               | string   | PD-1/PD-L1   |
 | stage               | Tumor stage at diagnosis                          | string   | Stage II     |
 | recist              | RECIST clinical response                          | factor   | CR/PR/SD/PD  |
-| response            | Clinical benefit status (e.g., response)          | string   | Responder    |
+| response            | Clinical benefit status (e.g., response)          | string   | R/NR         |
 | survival_time_os    | Overall survival time (months)                    | numeric  | 21.3         |
 | event_occurred_os   | Overall survival event (1 = death)                | binary   | 1            |
 | survival_time_pfs   | Progression-free survival time (months)           | numeric  | 18.2         |
