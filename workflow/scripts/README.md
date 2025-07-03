@@ -12,11 +12,9 @@ This directory contains **modular R scripts** used across the distributed univar
 ## Key Scripts (Refer to `workflow/scripts`)
 
 ### Analysis Scripts (`/scripts/analysis/`)
-- `local_analysis.R`: Performs univariable analysis per center using site-specific config
-- `aggregate_results.R`: Merges and meta-analyzes results from all centers
-- `meta_utils.R`: Helper functions for statistical aggregation (fixed/random effects)
-- `validate_inputs.R`: Harmonization and QC of center-provided data (optional)
-- `nextflow_pipeline.nf`: Optional orchestration script for distributed execution using Nextflow
+- `runSigAnalysis.R`: Performs univariable analysis per center using site-specific config
+- `runMetaAnalysis.R`: Merges and meta-analyzes results from all centers
+- `main.nf`: Orchestration script for distributed execution using Nextflow
 
 ### Visualization Scripts (`/scripts/visualization/`)
 - `visualization.Rmd`: Generates plots such as forest plots, volcano plots, and heatmaps based on integrated results
