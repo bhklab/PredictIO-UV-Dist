@@ -28,16 +28,23 @@ This document describes all **Immuno-Oncology (IO)** and **RNA-based signature**
 ---
 
 
-## Patient Summary Table
+## Key Clinical Variables
 
-| Variable         | Description                            | Format      | Example        |
-|------------------|----------------------------------------|-------------|----------------|
-| patient_id       | Unique TCGA barcode                    | string      | TCGA-2H-A9GF   |
-| age              | Age at diagnosis                       | integer     | 63             |
-| sex              | Biological sex                         | factor      | M/F    |
-| cancer_type      | Primary cancer type                    | string      | Melanoma       |
-| treatment_type   | IO therapy category                    | string      | PD-1           |
-| os_time_months   | Overall survival time (months)         | numeric     | 21.3           |
-| os_status        | Overall survival event (1 = death)     | binary      | 1              |
+| Variable          | Description                            | Format      | Example        |
+|------------------ |----------------------------------------|-------------|----------------|
+| patientid         | Unique TCGA barcode                    | string      | TCGA-2H-A9GF   |
+| age               | Age at diagnosis                       | integer     | 63             |
+| sex               | Biological sex                         | factor      | M/F    |
+| cancer_type       | Primary cancer type                    | string      | Melanoma       |
+| histo             | IO therapy category                    | string      | PD-1           |
+| treatment_type    | IO therapy category                    | string      | PD-1/PD-L1     |
+| stage             | Overall survival event (1 = death)     | binary      | 1              |
+| recist            | Overall survival event (1 = death)     | binary      | 1              |
+| response          | IO therapy category                    | string      | PD-1           |
+| survival_time_os  | Overall survival time (months)         | numeric     | 21.3           |
+| event_occurred_os | Overall survival event (1 = death)     | binary      | 1              |
+| survival_time_pfs | Overall survival time (months)         | numeric     | 21.3           |
+| event_occurred_pfs| Overall survival event (1 = death)     | binary      | 1              |
+| survival_unit     | Overall survival event (1 = death)     | binary      | 1              |
 
 ---
