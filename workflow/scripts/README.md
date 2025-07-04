@@ -33,6 +33,6 @@ Each center should:
 
 - Study name (e.g., ICB_Gide)
 - Cancer type (e.g., Melanoma)
-- Treatment class (e.g., PD-1)
+- Treatment class (e.g., CTLA4)
 - Input paths and signature set
 
