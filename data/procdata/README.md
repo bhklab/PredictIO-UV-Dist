@@ -35,4 +35,3 @@ This script loads raw inputs, processes the MultiAssayExperiment (MAE) object in
 All .rda files follow the naming structure:
 
 <study_name>__<cancer_type>__<treatment>.rda 
-EX: ICB_Gide__Melanoma__PD-(L)1.rda
