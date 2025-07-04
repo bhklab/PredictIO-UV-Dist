@@ -8,12 +8,12 @@ library(PredictioR)
 ########################################################
 ## Set Up Directories and Study Metadata
 ########################################################
-dir.in <- "data/rawdata"
-dir.out <- "data/procdata"
+dir_in <- "data/rawdata"
+dir_out <- "data/procdata"
 
-study.icb <- "ICB_Gide"
+study_icb <- "ICB_Gide"
 cancer_type <- "Melanoma"
-treatment <- "PD-(L)1"
+treatment_type <- "PD-(L)1"
 
 ########################################################
 ## Load Raw ICB Dataset
@@ -22,15 +22,15 @@ treatment <- "PD-(L)1"
 # https://www.orcestra.ca/clinical_icb/62f29e85be1b2e72a9c177f4
 # and placed in `data/rawdata/ICB_Gide.rds`
 
-mae_obj <- readRDS(file.path(dir.in, "ICB_Gide.rds"))  # MultiAssayExperiment
+mae_obj <- readRDS(file.path(dir_in, "ICB_Gide.rds"))  # MultiAssayExperiment
 se_obj  <- createSE(mae_obj)  # Extract SummarizedExperiment (TPM + clinical)
 
 ########################################################
 ## Load Gene Signature Data
 ########################################################
 # Signature objects should be pre-curated and saved as .rda files
-load(file.path(dir.in, "signature.rda"))   # signature matrix
-load(file.path(dir.in, "sig.info.rda"))    # metadata for signatures
+load(file.path(dir_in, "signature.rda"))   # signature matrix
+load(file.path(dir_in, "sig.info.rda"))    # metadata for signatures
 
 dat <- list('ICB' = dat_icb,
             'signature' = signature,
@@ -47,5 +47,5 @@ dat <- list(
 
 save(
   dat, 
-  file = file.path(dir.out, paste0(paste(study.icb, cancer_type, treatment, sep = "__"), ".rda"))
+  file = file.path(dir_out, paste0(paste(study_icb, cancer_type, treatment_type, sep = "__"), ".rda"))
 )
