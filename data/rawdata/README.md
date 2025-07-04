@@ -2,33 +2,49 @@
 
 ## Purpose
 
-This directory is for storing **immutable raw data files** that serve as the original source data for your project. Raw data should never be modified after being placed here.
+This directory is designated for **immutable raw data files** that serve as the original inputs to pipeline. 
 
-## IMPORTANT: Documentation Requirement
+---
 
-**EVERY TIME** you add data to this directory, you **MUST** document it in `docs/data_sources.md`. This documentation is critical for:
+## Data Access Instructions
 
-- Ensuring transparency in data acquisition
-- Allowing others to reproduce your work
-- Tracking data provenance and versioning
-- Understanding special processing requirements or limitations
+**No raw data files are included in this repository.** To fully reproduce the results, you must download the original raw data manually using the link below.
 
-## Git Synchronization Notice
+### Primary Data Source: ORCESTRA
 
-**⚠️ FILES IN THIS DIRECTORY ARE NOT SYNCHRONIZED WITH GIT ⚠️**
+All raw datasets used in this pipeline are hosted on [**ORCESTRA**](https://www.orcestra.ca/clinical_icb), a reproducible biomedical data platform.
 
-Raw data files are typically large and should not be stored in version control. Instead:
+Please download the raw data from the following curated dataset:
 
-- Only the directory structure and this README are tracked
-- You are responsible for backing up your data appropriately
-- Consider using symbolic links to reference data from your project directories
+➡️ **https://www.orcestra.ca/clinical_icb/62f29e85be1b2e72a9c177f4**
 
-## README Requirements for Data Subdirectories
+The dataset includes:
 
-When creating subdirectories, and possibly adding files here for your project,
-**YOU MUST** add a section to the `docs/data_sources.md` file that will help
-document the data you used and where it came from.
+- Normalized RNA-seq expression profiles (TPM)
+- Clinical annotations for immune checkpoint blockade (ICB) studies
+- Associated metadata and processing documentation
 
-See the `docs/data_sources.md` file for more details and examples.
+---
 
-Remember that proper data management is essential for research reproducibility and collaboration!
+### Signature Sets: Curated Immune/TME Signatures
+
+To perform signature scoring, association and meta-analysis, this project uses a curated collection of ~120 RNA-based gene signatures (e.g., IO-responsive, TME-related, IO-resistant).
+
+These are available from:
+
+➡️ **IO signatures** - Project repository: [bhklab/SignatureSets](https://github.com/bhklab/SignatureSets)  
+➡️ **TME signatures** - Project repository: [IOBR — Immune-Oncology Biological Research](https://github.com/IOBR/IOBR)  
+or  
+➡️ Download precompiled RData file: [link_to_be_provided]  
+*(update with URL if hosted externally, e.g., Code Ocean or Zenodo)*
+
+Each signature is:
+
+- Documented with its source publication
+- Categorized into functional classes (IO-sensitive, IO-resistant, etc.)
+- Used for GSVA, weighted mean, specific algorithm, or ssGSEA scoring
+
+---
+
+
+
