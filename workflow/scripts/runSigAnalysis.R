@@ -1,7 +1,29 @@
 # -----------------------------------------------------------
 # Signature Analysis Script
-# This script loads config from 'config_local.yaml'
-# and performs signature scoring and association analyses.
+#
+# Description:
+# This script loads configuration parameters from `config_local.yaml`
+# and performs signature-based analyses on a processed dataset.
+#
+# Specifically, it:
+#   - Computes gene signature scores (GSVA, ssGSEA, Weighted Mean, etc.)
+#   - Calculates pairwise correlations among signatures
+#   - Assesses association of signature scores with clinical outcomes:
+#       * Overall Survival (OS, Cox)
+#       * Progression-Free Survival (PFS, Cox)
+#       * Binary response (via logistic regression)
+#
+# Requirements:
+#   - Processed data (.rda) containing:
+#       * Normalized expression matrix (TPM and SummarizedExperiment)
+#       * Gene signatures list (IO and TME)
+#       * Signature metadata (method, etc.)
+#
+# Intended use:
+#   - To be executed independently by individual centers/nodes 
+#     on their local processed data
+#
+# Config file: config/config_local.yaml
 # -----------------------------------------------------------
 #############################################################
 # Load libraries
