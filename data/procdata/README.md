@@ -34,4 +34,4 @@ This script loads raw inputs, processes the MultiAssayExperiment (MAE) object in
 ### File naming convention
 All .rda files follow the naming structure:
 
-`<study_name>__<cancer_type>__<treatment>.rda`
+`<study_name>__<cancer_type>__<treatment_type>.rda`
