@@ -19,7 +19,6 @@ Please download the raw data from the following curated dataset:
 ➡️ **https://www.orcestra.ca/clinical_icb/62f29e85be1b2e72a9c177f4**
 
 The dataset includes:
-
 - Normalized RNA-seq expression profiles (TPM)
 - Clinical annotations for immune checkpoint blockade (ICB) studies
 - Associated metadata and processing documentation
@@ -39,7 +38,6 @@ or
 *(update with URL if hosted externally, e.g., Code Ocean or Zenodo)*
 
 Each signature is:
-
 - Documented with its source publication
 - Categorized into functional classes (IO-sensitive, IO-resistant, etc.)
 - Used for GSVA, weighted mean, specific algorithm, or ssGSEA scoring
