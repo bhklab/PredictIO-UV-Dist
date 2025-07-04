@@ -22,11 +22,11 @@ These scripts support:
 
 The pipeline is designed to support multiple data modalities across centers:
 
-- **Gene expression matrix**: Typically log2(TPM) RNA-seq or normalized microarray data.
+- **Gene expression matrix**: Typically log2(TPM+0.001) RNA-seq or normalized microarray data.
 - **Clinical variables**: OS (overall survival), PFS (progression-free survival), binary response.
-- **Signatures**: A curated library of immune-relevant gene signatures (e.g., IFN-γ, TIS, IPS) loaded from TBD
+- **Signatures**: A curated library of immune-relevant and TME gene signatures (e.g., IFN-γ, TIS, IPS) loaded from ZENODO ADD LINK
 
-Each center should:
+Each center should: --> SHOULD BE UPDATED
 
 1. Place data in /data/<CENTER_NAME>/
 2. Provide center-specific configuration in config/<center_config>.yaml, specifying:
