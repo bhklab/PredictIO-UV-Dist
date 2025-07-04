@@ -1,33 +1,28 @@
-# Processed Data Directory
+## Processed Data Preparation
 
-## Purpose
+This directory contains processed data objects used in downstream analyses. These are typically `.rda` files that include:
 
-This directory stores **pre-processed data files** that have been derived from raw data but are still intended for use across multiple analyses. Examples include:
+- Normalized gene expression matrices (TPM)
+- Clinical meta-data and gene annotations
+- Gene signature scores and metadata
 
-- Normalized data matrices
-- Filtered datasets
-- Aligned sequences
-- Feature extracted data
+---
 
-## IMPORTANT: Documentation Requirement
+### 🔧 How to Generate Processed Data
 
-When adding processed data to this directory, you **MUST** document:
+To prepare the required `.rda` files from raw input:
 
-1. The source of the raw data (referencing `docs/data_sources.md`)
-2. The processing steps or pipeline used
-3. Version information for tools used in processing
+1. **Download the raw dataset**  
+   - For example, download the ICB Gide dataset from:  
+     https://www.orcestra.ca/clinical_icb/62f29e85be1b2e72a9c177f4  
+   - Save the file as `ICB_Gide.rds` in the `data/rawdata/` directory.
 
-This documentation ensures research reproducibility and transparency in your data processing workflow.
+2. **Obtain the gene signature files**  
+   Ensure the following files are present in `data/rawdata/`:  
+   - `signature.rda` (curated gene signature matrix)  
+   - `sig.info.rda` (metadata for signatures)
 
-## Git Synchronization Notice
-
-**⚠️ FILES IN THIS DIRECTORY ARE NOT SYNCHRONIZED WITH GIT ⚠️**
-
-Processed data files are typically too large for version control. Instead:
-
-- Only the directory structure and this README are tracked
-- Document your processing code in version control
-(preferably in `workflow/scripts` or `workflow/notebooks`)!
-
-Remember that well-documented processed data makes your research more
-reproducible and accessible to collaborators!
+3. **Run the processing script**  
+   To generate the processed data object, run the R script:
+   ```bash
+   Rscript workflow/scripts/runProcData.R
