@@ -46,5 +46,7 @@ Each signature is:
 
 ---
 
+## Data Access Instructions
 
-
+Inclusion & Exclusion Criteria
+The datasets and signatures included in this pipeline were selected based on predefined inclusion/exclusion criteria, as described in the associated manuscript. Criteria focused on treatment relevance, data completeness, pre-treatment sample availability, and biological relevance of signatures. For details, see the **Materials and Methods** section of the manuscript.
