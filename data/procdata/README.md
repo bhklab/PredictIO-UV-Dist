@@ -26,3 +26,11 @@ To prepare the required `.rda` files from raw input:
    To generate the processed data object, run the R script:
    ```bash
    Rscript workflow/scripts/runProcData.R
+
+This script loads raw inputs, processes the MultiAssayExperiment (MAE) object into a SummarizedExperiment format, attaches relevant signatures, and outputs a combined R list object.
+
+### File naming convention
+All .rda files follow the naming structure:
+
+<study_name>__<cancer_type>__<treatment>.rda
+EX: ICB_Gide__Melanoma__PD-(L)1.rda
