@@ -1,31 +1,43 @@
-# load libraries
+# -----------------------------
+# Signature Analysis Script
+# This script loads config from 'config_local.yaml'
+# and performs signature scoring and association analyses.
+# -----------------------------
+
+#############################################################
+# Load libraries
+#############################################################
 library(PredictioR)
 library(survival)
 library(GSVA)
 library(dplyr)
 library(data.table)
 library(Hmisc)
+library(yaml)
 library(MultiAssayExperiment)
 
 ###########################################################
 ## Set up working directory and study configuration
 ###########################################################
+# Load configuration file
+config <- yaml::read_yaml("config/config_local.yaml")
 
-dir <- "/results"
+dir_in <- config$dir_in # "data/results"
+dir_out <- config$dir_out # "data/procdata"
+
+study_icb <- config$study_icb # "ICB_Gide"
+cancer_type <- config$cancer_type # "Melanoma"
+treatment_type <- config$treatment_type # "PD-(L)1"  (Other options include: CTLA-4, IO+combo, etc.)
 
 ############################################
-## load data
+## Load data
 ############################################
-data.files <- list.files("/data")
-
-study.icb <- "ICB_Gide"
-load(file.path("/data/ICB_Gide", list.files("/data/ICB_Gide")))
+input_file <- file.path(dir_in, paste0(study_icb, "__", cancer_type, "__", treatment_type, ".rda"))
+load(input_file)
 
 expr <- dat$ICB
 signature <- dat$signature
 signature_info <- dat$sig.info
-cancer_type <- "Melanoma"
-treatment_type <- "PD-1/PD-L1"
 
 ##################################################################
 ## Compute signature score
@@ -45,7 +57,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                            const.int = 0.001,
                            n.cutoff = 15,
                            sig.perc = 0.8,
-                           study = study.icb)
+                           study = study_icb)
     
     
     if(sum(!is.na(geneSig)) > 0){
@@ -64,7 +76,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                            const.int = 0.001,
                            n.cutoff = 15,
                            sig.perc = 0.8,
-                           study = study.icb)
+                           study = study_icb)
     
   }
   
@@ -78,9 +90,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                              const.int = 0.001,
                              n.cutoff = 15,
                              sig.perc = 0.8,
-                             study = paste(strsplit(study.icb, "__")[[1]][1],
-                                           strsplit(study.icb, "__")[[1]][2],
-                                           sep="__"))
+                             study = study_icb)
     
     if(sum(!is.na(geneSig)) > 0){
       geneSig <- geneSig[1,]
@@ -99,9 +109,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                              const.int = 0.001,
                              n.cutoff = 15,
                              sig.perc = 0.8,
-                             study = paste(strsplit(study.icb, "__")[[1]][1],
-                                           strsplit(study.icb, "__")[[1]][2],
-                                           sep="__"))
+                             study = study_icb)
     
   }
   
@@ -113,9 +121,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                           missing.perc = 0.5,
                           const.int = 0.001,
                           n.cutoff = 15,
-                          study = paste(strsplit(study.icb, "__")[[1]][1],
-                                        strsplit(study.icb, "__")[[1]][2],
-                                        sep="__"))
+                          study = study_icb)
     
   }
   
@@ -128,9 +134,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                                 const.int = 0.001,
                                 n.cutoff = 15,
                                 sig.perc = 0.8,
-                                study = paste(strsplit(study.icb, "__")[[1]][1],
-                                              strsplit(study.icb, "__")[[1]][2],
-                                              sep="__"))
+                                study = study_icb)
     
   }
   
@@ -143,9 +147,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                             const.int = 0.001,
                             n.cutoff = 15,
                             sig.perc = 0.8,
-                            study = paste(strsplit(study.icb, "__")[[1]][1],
-                                          strsplit(study.icb, "__")[[1]][2],
-                                          sep="__"))
+                            study = study_icb)
     
   }
   
@@ -158,9 +160,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                              const.int = 0.001,
                              n.cutoff = 15,
                              sig.perc = 0.8,
-                             study = paste(strsplit(study.icb, "__")[[1]][1],
-                                           strsplit(study.icb, "__")[[1]][2],
-                                           sep="__"))
+                             study = study_icb)
     
   }
   
@@ -173,9 +173,7 @@ geneSig.score <- lapply(1:length(signature), function(i){
                             const.int = 0.001,
                             n.cutoff = 15,
                             sig.perc = 0.8,
-                            study = paste(strsplit(study.icb, "__")[[1]][1],
-                                          strsplit(study.icb, "__")[[1]][2],
-                                          sep="__"))
+                            study = study_icb)
     
   }
   
@@ -205,7 +203,7 @@ if(length(remove) > 0){
   
 }
 
-save(geneSig.score, file=file.path("/results", paste(study.icb , "sig_score.rda", sep = "_")))
+save(geneSig.score, file=file.path(dir_out, paste(study_icb , "sig_score.rda", sep = "_")))
 
 ############################################################
 ## Pearson Correlation analysis
@@ -216,8 +214,8 @@ cor.val <- list ("r" = fit$r,
                  "n" = fit$n,
                  "p" = fit$P)
 
-names(cor.val) <- rep(study.icb, 3)
-save(cor.val, file = file.path("/results", paste(study.icb , "sig_pcor.rda", sep = "_")))
+names(cor.val) <- rep(study_icb, 3)
+save(cor.val, file = file.path(dir_out, paste(study_icb , "sig_pcor.rda", sep = "_")))
 
 #########################################################
 ## Association with OS
@@ -229,7 +227,7 @@ res.os <- lapply(1:nrow(geneSig.score), function(k){
                          geneSig = geneSig.score[k,],
                          time.censor = 36,
                          n.cutoff = 15,
-                         study =  paste(study.icb, cancer_type, treatment_type, sep="__"),
+                         study =  paste(study_icb, cancer_type, treatment_type, sep="__"),
                          surv.outcome = "OS",
                          sig.name = rownames(geneSig.score)[k],
                          cancer.type = cancer_type,
@@ -242,7 +240,7 @@ res.os <- lapply(1:nrow(geneSig.score), function(k){
 res.os <- do.call(rbind, res.os)
 res.os$FDR <- p.adjust(res.os$Pval, method="BH")
 
-save(res.os, file = file.path("/results", paste(study.icb , "sig_os.rda", sep = "_")))
+save(res.os, file = file.path(dir_out, paste(study_icb , "sig_os.rda", sep = "_")))
 
 #########################################################
 ## Association with PFS
@@ -254,7 +252,7 @@ res.pfs <- lapply(1:nrow(geneSig.score), function(k){
                          geneSig = geneSig.score[k,],
                          time.censor = 24,
                          n.cutoff = 15,
-                         study =  paste(study.icb, cancer_type, treatment_type, sep="__"),
+                         study =  paste(study_icb, cancer_type, treatment_type, sep="__"),
                          surv.outcome = "PFS",
                          sig.name = rownames(geneSig.score)[k],
                          cancer.type = cancer_type,
@@ -267,7 +265,7 @@ res.pfs <- lapply(1:nrow(geneSig.score), function(k){
 res.pfs <- do.call(rbind, res.pfs)
 res.pfs$FDR <- p.adjust(res.pfs$Pval, method="BH")
 
-save(res.pfs, file = file.path("/results", paste(study.icb , "sig_pfs.rda", sep = "_")))
+save(res.pfs, file = file.path(dir_out, paste(study_icb , "sig_pfs.rda", sep = "_")))
 
 #########################################################
 ## Association with response
@@ -278,7 +276,7 @@ res.logreg <- lapply(1:nrow(geneSig.score), function(k){
   res <- geneSigLogReg(dat.icb = expr,
                        geneSig = geneSig.score[k,],
                        n.cutoff = 15,
-                       study =  paste(study.icb, cancer_type, treatment_type, sep="__"),
+                       study =  paste(study_icb, cancer_type, treatment_type, sep="__"),
                        sig.name = rownames(geneSig.score)[k],
                        n0.cutoff = 3, 
                        n1.cutoff = 3,
@@ -292,5 +290,5 @@ res.logreg <- lapply(1:nrow(geneSig.score), function(k){
 res.logreg <- do.call(rbind, res.logreg)
 res.logreg$FDR <- p.adjust(res.logreg$Pval, method="BH")
 
-save(res.logreg, file = file.path("/results", paste(study.icb , "sig_logreg.rda", sep = "_")))
+save(res.logreg, file = file.path(dir_out, paste(study_icb , "sig_logreg.rda", sep = "_")))
 
