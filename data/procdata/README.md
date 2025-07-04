@@ -8,7 +8,7 @@ This directory contains processed data objects used in downstream analyses. Thes
 
 ---
 
-### 🔧 How to Generate Processed Data
+### How to Generate Processed Data
 
 To prepare the required `.rda` files from raw input:
 
