@@ -1,39 +1,35 @@
-# Configuration file for distributed univariable pipeline
+# config_local.yaml
 
-# Study metadata
-study_id: "ICB_Gide"
+# Study-specific identifiers
+study_id: "ICB_Gide" # ICB_<author or study name>
 cancer_type: "Melanoma"
+
+# Treatment type (can be changed based on your cohort)
+# Examples: "PD-1/PD-L1", "CTLA-4", "IO+combo"
 treatment_type: "PD-1/PD-L1"
 
-# Input paths (adjust for each center)
-input_data_path: "/data/ICB_Gide/"   # Directory containing RData file
-output_dir: "data/results/"
+# Input/output directories
+dir_in: "data/procdata"     # Processed input .rda file location
+dir_out: "data/results"     # Output results directory for this center
 
-# Expression and signature objects (inside loaded RData file)
-expression_object: "dat$ICB"
-signature_object: "dat$signature"
-signature_info_object: "dat$sig.info"
+# Input data object names in .rda file
+expr: "dat$ICB"
+signature: "dat$signature"
+signature_info: "dat$sig.info"
 
-# Signature scoring parameters
+# Signature scoring settings
 signature_scoring:
-  missing_threshold: 0.5
-  constant_offset: 0.001
-  gene_cutoff: 15
-  coverage: 0.8
+  missing.perc: 0.5
+  const.int: 0.001
+  n.cutoff: 15
+  sig.perc: 0.8
 
-# Survival analysis
-survival:
-  os_censor_time: 36
-  pfs_censor_time: 24
-  min_samples: 15
-
-
-# Logistic regression analysis
+# Logistic regression parameters
 logreg:
-  min_class_0: 3
-  min_class_1: 3
+ n0.cutoff: 3
+ n1.cutoff: 3
 
-# Output filenames (automatically prefixed by study_id)
+# Output filenames (saved under dir_out)
 output_files:
   scores: "sig_score.rda"
   correlation: "sig_pcor.rda"
