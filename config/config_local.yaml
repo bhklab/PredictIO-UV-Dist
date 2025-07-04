@@ -1,12 +1,12 @@
 # config_local.yaml
 
 # Study-specific identifiers
-study_id: "ICB_Gide" # ICB_<author or study name>
+study_icb: "ICB_Gide" # ICB_<author or study name>
 cancer_type: "Melanoma"
 
 # Treatment type (can be changed based on your cohort)
 # Examples: "PD-1/PD-L1", "CTLA-4", "IO+combo"
-treatment_type: "PD-1/PD-L1"
+treatment_type: "PD-(L)1"
 
 # Input/output directories
 dir_in: "data/procdata"     # Processed input .rda file location
