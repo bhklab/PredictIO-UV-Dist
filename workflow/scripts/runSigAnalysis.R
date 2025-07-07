@@ -43,8 +43,13 @@ library(MultiAssayExperiment)
 # Load configuration file
 config <- yaml::read_yaml("config/config_local.yaml")
 
-dir_in <- config$dir_in # "data/results"
-dir_out <- config$dir_out # "data/procdata"
+dir_in <- config$dir_in # "data/procdata"
+
+# create output directory for each dataset/node
+dir_out <- file.path(config$dir_out, config$study_icb) # "data/results/<study_icb>"
+if (!dir.exists(dir_out)) {
+dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
+}
 
 study_icb <- config$study_icb # "ICB_Gide"
 cancer_type <- config$cancer_type # "Melanoma"
@@ -312,4 +317,5 @@ res.logreg <- do.call(rbind, res.logreg)
 res.logreg$FDR <- p.adjust(res.logreg$Pval, method="BH")
 
 save(res.logreg, file = file.path(dir_out, paste(study_icb , "sig_logreg.rda", sep = "_")))
+
 
