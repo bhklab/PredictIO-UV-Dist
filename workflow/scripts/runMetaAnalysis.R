@@ -1,63 +1,90 @@
-# libraries
+# -----------------------------------------------------------
+# Meta-analysis Script
+#
+# Description:
+# This script loads configuration parameters from `config_meta.yaml`
+# and performs integration analysis using signature-based associations.
+#
+# Specifically, it:
+#   - Computes signature–outcome associations locally at each center
+#   - Shares local results (e.g., log hazard ratios, odds ratios, correlations)
+#     with a central node to enable downstream meta-analysis across
+#     multiple centers in a federated setting
+#   - Aggregates effect sizes at the central node using fixed- or random-effects
+#     models to obtain pooled estimates
+#   - Supports integration analyses in pan-cancer, cancer-specific, and
+#     treatment-specific settings
+#
+# Config file: config/config_meta.yaml
+# -----------------------------------------------------------
+#############################################################
+# Load libraries
+#############################################################
 library(PredictioR)
-library(circlize)
-library(ComplexHeatmap)
+#library(circlize)
+#library(ComplexHeatmap)
 library(meta)
 library(dplyr)
 library(data.table)
-library(forestplot)
-library(MultiAssayExperiment)
+#library(forestplot)
 library(Hmisc)
-###########################################################
-## set up directory
-###########################################################
 
-dir.out <- "/results"
-dir.in <- "/data"
+###########################################################
+## Set up working directory and study configuration
+###########################################################
+# Load configuration file
+config <- yaml::read_yaml("config/config_meta.yaml")
+
+dir_in <- config$dir_in # "/data/results/local"
+dir_out <- config$dir_out # "/data/results/central"
+
+# create output directory as central node
+if (!dir.exists(dir_out)) {
+dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
+}
 
 ############################################
 ## load data
 ############################################
-data.files <- list.files(dir.in)
+data.files <- list.files(file.path(getwd(), dir_in))
 
 ## extract correlation data
-cor_files <- data.files[grep("_pcor", data.files)]
-dir <- file.path(dir.in, cor_files)
-
-cor.files <- lapply(1:length(dir), function(k){
+cor.files <- lapply(1:length(data.files), function(k){
   
-  load(file.path(dir[k]))
+  local.files <- list.files(file.path(getwd(), dir_in, data.files[k]))
+  cor_files <- local.files[grep("_pcor", local.files)]
+  dir <- file.path(getwd(), dir_in, data.files[k], cor_files)
+  load(file.path(dir))
   cor.val
   
 })
 
-study.icb <- substr(cor_files, 1, nchar(cor_files) - 13)
-names(cor.files) <- study.icb
-save(cor.files, file = file.path(dir.out, "pCor_result.RData"))
+study_icb <- c(data.files)
+names(cor.files) <- study_icb
+save(cor.files, file = file.path(getwd(), dir_out, "pCor_result.RData"))
 
 ## extract signature score data
-score_files <- data.files[grep("_score", data.files)]
-dir <- file.path(dir.in, score_files)
-
-score.files <- lapply(1:length(dir), function(k){
+score.files <- lapply(1:length(data.files), function(k){
   
-  load(file.path(dir[k]))
+  local.files <- list.files(file.path(getwd(), dir_in, data.files[k]))
+  sig_files <- local.files[grep("_score", local.files)]
+  dir <- file.path(getwd(), dir_in, data.files[k], sig_files)
+  load(file.path(dir))
   geneSig.score
   
 })
 
-study.icb <- substr(score_files, 1, nchar(score_files) - 14)
-names(score.files) <- study.icb
-save(score.files, file = file.path(dir.out, "sigScore_result.RData"))
-
+study_icb <- c(data.files)
+names(score.files) <- study_icb
+save(score.files, file = file.path(getwd(), dir_out, "sigScore_result.RData"))
 
 ## extract signature score association (OS) data
-sig_files <- data.files[grep("_os", data.files)]
-dir <- file.path(dir.in, sig_files)
-
-res.os <- lapply(1:length(dir), function(k){
+res.os <- lapply(1:length(data.files), function(k){
   
-  load(file.path(dir[k]))
+  local.files <- list.files(file.path(getwd(), dir_in, data.files[k]))
+  os_files <- local.files[grep("_os", local.files)]
+  dir <- file.path(getwd(), dir_in, data.files[k], os_files)
+  load(file.path(dir))
   res.os
   
 })
@@ -65,16 +92,16 @@ res.os <- lapply(1:length(dir), function(k){
 res.os <- do.call(rbind, res.os)
 res.os <- res.os[!is.na(res.os$Coef), ]
 rownames(res.os) <- NULL
-save(res.os, file = file.path(dir.out, "res.os.RData"))
-write.csv(res.os, file = file.path(dir.out, "res.os.csv"), row.names=FALSE)
+save(res.os, file = file.path(getwd(), dir_out, "res.os.RData"))
+write.csv(res.os, file = file.path(getwd(), dir_out, "res.os.csv"), row.names=FALSE)
 
 ## extract signature score association (PFS) data
-sig_files <- data.files[grep("_pfs", data.files)]
-dir <- file.path(dir.in, sig_files)
-
-res.pfs <- lapply(1:length(dir), function(k){
+res.pfs <- lapply(1:length(data.files), function(k){
   
-  load(file.path(dir[k]))
+  local.files <- list.files(file.path(getwd(), dir_in, data.files[k]))
+  pfs_files <- local.files[grep("_pfs", local.files)]
+  dir <- file.path(getwd(), dir_in, data.files[k], pfs_files)
+  load(file.path(dir))
   res.pfs
   
 })
@@ -82,16 +109,16 @@ res.pfs <- lapply(1:length(dir), function(k){
 res.pfs <- do.call(rbind, res.pfs)
 res.pfs <- res.pfs[!is.na(res.pfs$Coef), ]
 rownames(res.pfs) <- NULL
-save(res.pfs, file = file.path(dir.out, "res.pfs.RData"))
-write.csv(res.pfs, file = file.path(dir.out, "res.pfs.csv"), row.names = FALSE)
+save(res.pfs, file = file.path(getwd(), dir_out, "res.pfs.RData"))
+write.csv(res.pfs, file = file.path(getwd(), dir_out, "res.pfs.csv"), row.names=FALSE)
 
 ## extract signature score association (response) data
-sig_files <- data.files[grep("_logreg", data.files)]
-dir <- file.path(dir.in, sig_files)
-
-res.logreg <- lapply(1:length(dir), function(k){
+res.logreg <- lapply(1:length(data.files), function(k){
   
-  load(file.path(dir[k]))
+  local.files <- list.files(file.path(getwd(), dir_in, data.files[k]))
+  logreg_files <- local.files[grep("_logreg", local.files)]
+  dir <- file.path(getwd(), dir_in, data.files[k], logreg_files)
+  load(file.path(dir))
   res.logreg
   
 })
@@ -99,15 +126,15 @@ res.logreg <- lapply(1:length(dir), function(k){
 res.logreg <- do.call(rbind, res.logreg)
 res.logreg <- res.logreg[!is.na(res.logreg$Coef), ]
 rownames(res.logreg) <- NULL
-save(res.logreg, file = file.path(dir.out, "res.logreg.RData"))
-write.csv(res.logreg, file = file.path(dir.out, "res.logreg.csv"), row.names = FALSE)
+save(res.logreg, file = file.path(getwd(), dir_out, "res.logreg.RData"))
+write.csv(res.logreg, file = file.path(getwd(), dir_out, "res.logreg.csv"), row.names=FALSE)
 
 ####################################################################
 ####################################################################
 ## Meta correlation
 ####################################################################
 ####################################################################
-load(file.path(dir.out, "pCor_result.RData"))
+load(file.path(getwd(), dir_out, "pCor_result.RData"))
 
 cor <- lapply(1:length(cor.files), function(i){
   
@@ -226,14 +253,14 @@ metaCor <- do.call(cbind, metaCor)
 rownames(metaCor) <- geneSig1
 colnames(metaCor) <- geneSig2
 
-save(metaCor, file=file.path(dir.out, "metaCor_matrix.RData"))
+save(metaCor, file=file.path(getwd(), dir_out, "metaCor_matrix.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: pan-cancer and response
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.logreg.RData"))
+load(file.path(getwd(), dir_out, "res.logreg.RData"))
 df <- res.logreg
 signature <- unique(df$Gene)
 
@@ -259,15 +286,15 @@ AllGeneSig_meta <- AllGeneSig_meta[!is.na(AllGeneSig_meta$Coef), ]
 AllGeneSig_meta$FDR <- p.adjust(AllGeneSig_meta$Pval, method = "BH")
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_logreg.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_logreg.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_logreg.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_logreg.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: pan-cancer and OS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.os.RData"))
+load(file.path(getwd(), dir_out, "res.os.RData"))
 df <- res.os
 signature <- unique(df$Gene)
 
@@ -293,15 +320,15 @@ AllGeneSig_meta <- AllGeneSig_meta[!is.na(AllGeneSig_meta$Coef), ]
 AllGeneSig_meta$FDR <- p.adjust(AllGeneSig_meta$Pval, method = "BH")
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_os.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_os.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_os.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_os.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: pan-cancer and PFS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.pfs.RData"))
+load(file.path(getwd(), dir_out, "res.pfs.RData"))
 df <- res.pfs
 signature <- unique(df$Gene)
 
@@ -327,15 +354,15 @@ AllGeneSig_meta <- AllGeneSig_meta[!is.na(AllGeneSig_meta$Coef), ]
 AllGeneSig_meta$FDR <- p.adjust(AllGeneSig_meta$Pval, method = "BH")
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_pfs.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_pan_pfs.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_pfs.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_pan_pfs.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-cancer and response
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.logreg.RData"))
+load(file.path(getwd(), dir_out, "res.logreg.RData"))
 df <- res.logreg
 signature <- unique(df$Gene)
 
@@ -403,15 +430,15 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_logreg.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_logreg.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_logreg.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_logreg.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-cancer and OS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.os.RData"))
+load(file.path(getwd(), dir_out, "res.os.RData"))
 df <- res.os
 signature <- unique(df$Gene)
 
@@ -479,15 +506,15 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_os.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_os.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_os.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_os.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-cancer and PFS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.pfs.RData"))
+load(file.path(getwd(), dir_out, "res.pfs.RData"))
 df <- res.pfs
 signature <- unique(df$Gene)
 
@@ -555,16 +582,15 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_pfs.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perCan_pfs.RData"))
-
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_pfs.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perCan_pfs.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-treatment and response
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.logreg.RData"))
+load(file.path(getwd(), dir_out, "res.logreg.RData"))
 df <- res.logreg
 signature <- unique(df$Gene)
 
@@ -632,15 +658,15 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_logreg.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_logreg.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_logreg.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_logreg.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-treatment and OS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.os.RData"))
+load(file.path(getwd(), dir_out, "res.os.RData"))
 df <- res.os
 signature <- unique(df$Gene)
 
@@ -708,15 +734,15 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_os.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_os.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_os.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_os.RData"))
 
 ################################################################################
 ################################################################################
 ## Association meta-analysis: per-treatment and PFS
 ################################################################################
 ################################################################################
-load(file.path(dir.out, "res.pfs.RData"))
+load(file.path(getwd(), dir_out, "res.pfs.RData"))
 df <- res.pfs
 signature <- unique(df$Gene)
 
@@ -784,8 +810,8 @@ AllGeneSig_meta <- lapply(1:length(group), function(k){
 AllGeneSig_meta <- do.call(rbind, AllGeneSig_meta)
 AllGeneSig_meta <- AllGeneSig_meta[order(AllGeneSig_meta$FDR), ]
 
-write.csv(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_pfs.csv"), row.names = FALSE)
-save(AllGeneSig_meta, file=file.path(dir.out, "meta_perTreatment_pfs.RData"))
+write.csv(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_pfs.csv"), row.names = FALSE)
+save(AllGeneSig_meta, file=file.path(getwd(), dir_out, "meta_perTreatment_pfs.RData"))
 
 
 ################################################################
