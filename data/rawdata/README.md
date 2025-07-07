@@ -47,5 +47,4 @@ Each signature is:
 
 The datasets and signatures included in this pipeline were selected based on predefined inclusion/exclusion criteria, as described in the associated manuscript. Criteria focused on treatment relevance, data completeness, pre-treatment sample availability, and biological relevance of signatures. For details, see the **Materials and Methods** section of the manuscript.
 
-### Note
-This pipeline uses a subset of ORCESTRA datasets, selected based on data completeness, treatment annotation, and sample size. Analyses are stratified by cancer type and treatment for consistency across studies.
+**Note** - This pipeline uses a subset of ORCESTRA datasets, selected based on data completeness, treatment annotation, and sample size. Analyses are stratified by cancer type and treatment for consistency across studies.
