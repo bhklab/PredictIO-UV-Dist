@@ -180,7 +180,7 @@ meta.cor <- lapply(1:length(geneSig1), function(i){
     
     if(sum(!is.na(sub.df$p)) > 0 & nrow(sub.df) >= 3){
       
-      fit <- metacor(sub.df$r, sub.df$n, sm = "zcor",
+      fit <- metacor(sub.df$r, sub.df$n, sm = "cor",
                      control=list(stepadj=0.5, maxiter=1000))
       meta.res <- data.frame(geneSig1 = geneSig1[i],
                              geneSig2 = geneSig2[j],
@@ -228,8 +228,8 @@ metaCor <- lapply(1:length(geneSig1), function(i){
     
     if(sum(df$geneSig2 == geneSig2[j]) > 0){
       r <- unique(df[df$geneSig2 == geneSig2[j], "r"])
-      if(r > 1){ r <- 1 }
-      if(r < (-1)){ r <- (-1)}
+     # if(r > 1){ r <- 1 }
+     # if(r < (-1)){ r <- (-1)}
     }else{ r <- NA }
     
     r
