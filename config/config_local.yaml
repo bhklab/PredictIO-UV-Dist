@@ -10,7 +10,7 @@ treatment_type: "PD-(L)1"
 
 # Input/output directories
 dir_in: "data/procdata"     # Processed input .rda file location
-dir_out: "data/results"     # Output results directory for this center
+dir_out: "data/results/local"     # Output results directory for this center
 
 # Input data object names in .rda file
 expr: "dat$ICB"
