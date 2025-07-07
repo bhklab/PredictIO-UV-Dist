@@ -1,7 +1,7 @@
 # config_local.yaml
 
 # Study-specific identifiers
-study_icb: "ICB_Miao1" # ICB_<author or study name>
+study_icb: "ICB_Gide" # ICB_<author or study name>
 cancer_type: "Melanoma"
 
 # Treatment type (can be changed based on your cohort)
