@@ -39,7 +39,7 @@ treatment_type <- config$treatment_type # "PD-(L)1"  (Other options include: CTL
 # and placed in `data/rawdata/ICB_Gide.rds`
 
 mae_obj <- readRDS(file.path(dir_in, "ICB_Gide.rds"))  # MultiAssayExperiment
-se_obj  <- createSE(mae_obj)  # Extract SummarizedExperiment (TPM + clinical)
+se_obj  <- PredictioR::createSE(mae_obj)  # Extract SummarizedExperiment (TPM + clinical)
 
 ########################################################
 ## Load Gene Signature Data
