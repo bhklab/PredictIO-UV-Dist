@@ -34,7 +34,7 @@ These are available from:
 ➡️ **IO signatures** - Project repository: [bhklab/SignatureSets](https://github.com/bhklab/SignatureSets)  
 ➡️ **TME signatures** - Project repository: [IOBR — Immune-Oncology Biological Research](https://github.com/IOBR/IOBR)  
 or  
-➡️ Download precompiled RData file: (https://zenodo.org/records/15832652)  
+➡️ Download precompiled RData file: [DOI 10.5281/zenodo.15832651](https://zenodo.org/records/15832652)  
 
 Each signature is:
 - Documented with its source publication
