@@ -42,6 +42,8 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#project-overview">Project Overview</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#set-up">Set Up</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
@@ -49,6 +51,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#repository-structure">Repository Structure</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a>
     </li>
@@ -104,20 +108,39 @@
 <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/bhklab/predictio-uv-dist?style=flat-square" />
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/bhklab/predictio-uv-dist?style=flat-square" />
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/bhklab/predictio-uv-dist?style=flat-square" /></p>
+<h2 id="project-overview">Project Overview</h2>
+<p>This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to Immuno-Oncology (IO) therapies. It supports:</p>
+<ul>
+<li>Center-specific signature scoring and modeling (e.g., OS, PFS, response)</li>
+<li>Strict data privacy (no sharing of raw or patient-level data)</li>
+<li>Centralized meta-analysis of effect sizes across datasets</li>
+<li>Modular, reproducible pipeline built with <strong>Pixi</strong>, <strong>Nextflow</strong>, and <strong>R</strong></li>
+</ul>
 <h2 id="set-up">Set Up</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <p>Pixi is required to run this project.
 If you haven't installed it yet, <a href="https://pixi.sh/latest/">follow these instructions</a></p>
 <h3 id="installation">Installation</h3>
-<ol>
-<li>Clone this repository to your local machine</li>
-<li>Navigate to the project directory</li>
-<li>Set up the environment using Pixi:</li>
-</ol>
-<pre><code class="language-bash">pixi install
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/bhklab/predictio-uv-dist.git
+cd predictio-uv-dist
+
+# Install dependencies via Pixi
+pixi install
 </code></pre>
+<h2 id="repository-structure">Repository Structure</h2>
+<pre><code>predictio-uv-dist/
+├── config/           # YAML config files for each dataset and center
+├── data/             # Raw, processed, and results directories
+├── workflow/         # Scripts and Nextflow pipeline for analysis
+├── docs/             # MkDocs documentation 
+├── pixi.toml         # Pixi environment specification
+└── README.md         # # Project overview and setup instructions
+</code></pre>
+<hr />
 <h2 id="documentation">Documentation</h2>
-<p>Click <a href="https://bhklab.github.io/predictio-uv-dist">here</a> to view the full documentation.</p>
+<p>Full documentation, including usage instructions, data setup, config templates, and pipeline stages, is available at:</p>
+<p>🔗 <a href="https://bhklab.github.io/predictio-uv-dist">https://bhklab.github.io/predictio-uv-dist</a></p>
               
             </div>
           </div><footer>
@@ -170,5 +193,5 @@ If you haven't installed it yet, <a href="https://pixi.sh/latest/">follow these 
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-08 15:30:45.678047+00:00
+Build Date UTC : 2025-07-08 15:47:44.671984+00:00
 -->
