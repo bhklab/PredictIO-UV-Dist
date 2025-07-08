@@ -20,7 +20,8 @@ This document describes all **Immuno-Oncology (IO)** and **RNA-based signature**
 
 - **Name**: SignatureSets: An R Package for RNA-Based Immuno-Oncology Signatures
 - **Version**: v1.0
-- **URL**: [bhklab/SignatureSets](https://github.com/bhklab/SignatureSets)
+- **URL - IO Signatures**: [bhklab/SignatureSets](https://github.com/bhklab/SignatureSets) 
+- **URL - TME Signatures** — [IOBR Project](https://github.com/IOBR/IOBR)  
 - **Access Method**: Direct download or programmatic retrieval via API (if applicable)
 - **Data Format**: rda, CSV (signatures, metadata)
 - **Citation**: [Bareche, Y., Kelly, D., Abbas-Aghababazadeh, F. et al., Annals of Oncology 2022](https://pubmed.ncbi.nlm.nih.gov/36055464/)
