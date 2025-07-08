@@ -18,6 +18,15 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/bhklab/predictio-uv-dist?style=flat-square)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/bhklab/predictio-uv-dist?style=flat-square)
 
+## Project Overview
+
+This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to Immuno-Oncology (IO) therapies. It supports:
+
+- Center-specific signature scoring and modeling (e.g., OS, PFS, response)
+- Strict data privacy (no sharing of raw or patient-level data)
+- Centralized meta-analysis of effect sizes across datasets
+- Modular, reproducible pipeline built with **Pixi**, **Nextflow**, and **R**
+
 ## Set Up
 
 ### Prerequisites
@@ -27,14 +36,31 @@ If you haven't installed it yet, [follow these instructions](https://pixi.sh/lat
 
 ### Installation
 
-1. Clone this repository to your local machine
-2. Navigate to the project directory
-3. Set up the environment using Pixi:
-
 ```bash
+# Clone the repository
+git clone https://github.com/bhklab/predictio-uv-dist.git
+cd predictio-uv-dist
+
+# Install dependencies via Pixi
 pixi install
 ```
+## Repository Structure
+
+```
+predictio-uv-dist/
+├── config/           # YAML config files for each dataset and center
+├── data/             # Raw, processed, and results directories
+├── workflow/         # Scripts and Nextflow pipeline for analysis
+├── docs/             # MkDocs documentation 
+├── pixi.toml         # Pixi environment specification
+└── README.md         # # Project overview and setup instructions
+```
+
+---
 
 ## Documentation
 
-Click [here](https://bhklab.github.io/predictio-uv-dist) to view the full documentation.
+Full documentation, including usage instructions, data setup, config templates, and pipeline stages, is available at:
+
+🔗 [https://bhklab.github.io/predictio-uv-dist](https://bhklab.github.io/predictio-uv-dist)
+
