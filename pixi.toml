@@ -22,10 +22,6 @@ env.PROCDATA = "${PIXI_PROJECT_ROOT}/data/procdata"
 env.RESULTS = "${PIXI_PROJECT_ROOT}/data/results"
 env.SCRIPTS = "${PIXI_PROJECT_ROOT}/workflow/scripts"
 
-scripts.post-setup = [
-  "Rscript -e \"remotes::install_github('bhklab/PredictioR', ref = '46a2708fc7455a4cd064334b3de2407c7c82db73')\""
-]
-
 [dependencies]
 python = ">=3.12"
 ipython = "*"
