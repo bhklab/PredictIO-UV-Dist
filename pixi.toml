@@ -29,6 +29,33 @@ ipykernel = "*"
 jupyterlab = "*"
 pip = "*"
 
+# R and core packages
+r-base = ">=4.4.1,<4.5"
+r-devtools = "*"
+r-remotes = "*"
+
+# CRAN packages with versions (when available via conda)
+r-hmisc = "5.1_3"
+r-circlize = "0.4.16"
+r-enrichr = "3.2"
+r-forestplot = "3.1.3"
+r-meta = "7.0_0"
+
+# Bioconductor packages
+bioconductor-complexheatmap = "*"
+bioconductor-gsva = "*"
+bioconductor-multiassayexperiment = "*"
+bioconductor-survcomp = "*"
+
+[pypi-dependencies]
+damply = ">=0.10.0, <0.11"
+
+[activation.scripts]
+# Install GitHub package (PredictioR) from a specific commit
+post-setup = [
+  'Rscript -e "remotes::install_github(\'bhklab/PredictioR\', ref = \'46a2708fc7455a4cd064334b3de2407c7c82db73\')"'
+]
+
 [pypi-dependencies]
 damply = ">=0.10.0, <0.11"
 
