@@ -47,8 +47,28 @@
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Usage</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#project-configuration">Project Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-customize-configuration-files">1. Customize Configuration Files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-add-input-data">2. Add Input Data</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-your-analysis">Running Your Analysis</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-install-dependencies">1. Install Dependencies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-run-local-processing">2. Run Local Processing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-run-signature-scoring-univariable-analysis">3. Run Signature Scoring &amp; Univariable Analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-run-meta-analysis-central-node-only">4. Run Meta-analysis (central node only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-generate-visualizations">5. Generate Visualizations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tips-for-managing-your-data">Tips for Managing Your Data</a>
     </li>
     </ul>
                 </li>
@@ -86,12 +106,60 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="usage-guide">Usage Guide</h1>
+<p>This section provides step-by-step instructions to configure, run, and manage your analysis using the distributed biomarker discovery pipeline.</p>
+<hr />
 <h2 id="project-configuration">Project Configuration</h2>
-<p>TODO:: discuss how to edit the configuration files in the <code>config/</code> directory to match your research parameters</p>
-<p>TODO:: discuss how to add your input data to the <code>data/rawdata/</code> directory and document it properly in the <code>docs/data_sources/</code> directory</p>
-<p>TODO:: discuss how to manage and organize your data sources effectively</p>
+<h3 id="1-customize-configuration-files">1. Customize Configuration Files</h3>
+<p>Edit the YAML files in the <code>config/</code> directory to reflect your study parameters:
+- <code>config_proc.yaml</code>: For processing raw input into analysis-ready format.
+- <code>config_local.yaml</code>: For local signature scoring and modeling.</p>
+<p>Each center should create a center-specific config file using the template:</p>
+<pre><code class="language-bash">config/&lt;center_or_study_name&gt;.yaml
+# Example:
+config/ICB_Gide.yaml
+</code></pre>
+<p>Use <code>config/config_local.yaml</code> as a reference.</p>
+<hr />
+<h3 id="2-add-input-data">2. Add Input Data</h3>
+<p>Place your raw input datasets (e.g., <code>.rds</code> files) in the <code>data/rawdata/</code> directory:</p>
+<pre><code class="language-bash">data/rawdata/ICB_Gide.rds
+</code></pre>
+<p>Also include gene signature metadata files:</p>
+<ul>
+<li><code>signature.rda</code></li>
+<li><code>sig.info.rda</code></li>
+<li>Precompiled <code>.RData</code> file — <a href="https://zenodo.org/records/15832652">Zenodo DOI: 10.5281/zenodo.15832651</a></li>
+</ul>
+<hr />
 <h2 id="running-your-analysis">Running Your Analysis</h2>
-<p>TODO:: discuss using pixi tasks to run the analysis</p>
+<h3 id="1-install-dependencies">1. Install Dependencies</h3>
+<p>If using <a href="https://prefix.dev/docs/pixi/overview"><code>pixi</code></a>:</p>
+<pre><code class="language-bash">pixi install
+</code></pre>
+<p>This sets up your environment with R, Bioconductor, and required packages.</p>
+<hr />
+<h3 id="2-run-local-processing">2. Run Local Processing</h3>
+<p>Prepare analysis-ready <code>.rda</code> files from raw data:</p>
+<pre><code class="language-bash">Rscript workflow/scripts/runProcData.R
+</code></pre>
+<hr />
+<h3 id="3-run-signature-scoring-univariable-analysis">3. Run Signature Scoring &amp; Univariable Analysis</h3>
+<pre><code class="language-bash">Rscript workflow/scripts/runSigAnalysis.R
+</code></pre>
+<hr />
+<h3 id="4-run-meta-analysis-central-node-only">4. Run Meta-analysis (central node only)</h3>
+<pre><code class="language-bash">Rscript workflow/scripts/runMetaAnalysis.R
+</code></pre>
+<hr />
+<h3 id="5-generate-visualizations">5. Generate Visualizations</h3>
+<pre><code class="language-bash">Rscript workflow/scripts/visualization.R
+</code></pre>
+<p>This script generates forest plots, volcano plots, and heatmaps.</p>
+<hr />
+<h2 id="tips-for-managing-your-data">Tips for Managing Your Data</h2>
+<ul>
+<li>Use meaningful filenames (e.g., <code>ICB_Gide__Melanoma__PD-(L)1.rda</code>)</li>
+</ul>
               
             </div>
           </div><footer>
