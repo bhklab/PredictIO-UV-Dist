@@ -45,8 +45,8 @@ config <- yaml::read_yaml("config/config_local.yaml")
 
 dir_in <- config$dir_in # "data/procdata"
 
-# create output directory for each dataset/node
-dir_out <- file.path(config$dir_out, config$study_icb) # "data/results/<study_icb>"
+# create output directory for each dataset or node
+dir_out <- file.path(config$dir_out, config$study_icb) # "data/results/local/<study_icb>"
 if (!dir.exists(dir_out)) {
 dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
 }
