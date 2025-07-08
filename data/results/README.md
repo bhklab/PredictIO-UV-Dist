@@ -10,7 +10,6 @@ This directory stores the **output files** from all stages of the analysis pipel
 - Summary tables and visualizations
 
 The structure reflects a **federated analysis design**, with separate subfolders for:
-
 - **Local results**: results generated independently by each contributing center
 - **Central results**: results aggregated at the central node via meta-analysis
 
