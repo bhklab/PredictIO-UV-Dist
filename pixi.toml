@@ -22,7 +22,8 @@ env.PROCDATA = "${PIXI_PROJECT_ROOT}/data/procdata"
 env.RESULTS = "${PIXI_PROJECT_ROOT}/data/results"
 env.SCRIPTS = "${PIXI_PROJECT_ROOT}/workflow/scripts"
 
-scripts.post-setup = [
+[activation.scripts]
+post-setup = [
   "Rscript -e \"if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager')\"",
   "Rscript -e \"BiocManager::install('GSVA')\"",
   "Rscript -e \"BiocManager::install('MultiAssayExperiment')\"",
