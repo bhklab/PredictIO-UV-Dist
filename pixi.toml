@@ -22,6 +22,15 @@ env.PROCDATA = "${PIXI_PROJECT_ROOT}/data/procdata"
 env.RESULTS = "${PIXI_PROJECT_ROOT}/data/results"
 env.SCRIPTS = "${PIXI_PROJECT_ROOT}/workflow/scripts"
 
+scripts.post-setup = [
+  "Rscript -e \"if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager')\"",
+  "Rscript -e \"BiocManager::install('GSVA')\"",
+  "Rscript -e \"BiocManager::install('MultiAssayExperiment')\"",
+  "Rscript -e \"BiocManager::install('survcomp')\"",
+  "Rscript -e \"BiocManager::install('ComplexHeatmap')\"",
+  "Rscript -e \"remotes::install_github('bhklab/PredictioR', ref = '46a2708fc7455a4cd064334b3de2407c7c82db73')\""
+]
+
 [dependencies]
 python = ">=3.12"
 ipython = "*"
@@ -30,7 +39,7 @@ jupyterlab = "*"
 pip = "*"
 
 # R and core packages
-r-base = ">=4.4.1,<4.5"
+r-base = ">=4.3,<4.4"
 r-devtools = "*"
 r-remotes = "*"
 
@@ -40,12 +49,6 @@ r-circlize = "==0.4.16"
 r-enrichr = "==3.2"
 r-forestplot = "==3.1.3"
 r-meta = "==7.0_0"
-
-# Bioconductor packages
-bioconductor-complexheatmap = "*"
-bioconductor-gsva = "*"
-bioconductor-multiassayexperiment = "*"
-bioconductor-survcomp = "*"
 
 [pypi-dependencies]
 damply = ">=0.10.0, <0.11"
