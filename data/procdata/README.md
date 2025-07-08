@@ -67,12 +67,12 @@ ICB_Gide__Melanoma__PD-(L)1.rda
 
 To ensure consistency across datasets with varying annotation styles:
 
-- Treatments such as `"anti-PD-1"`, `"anti-PD-L1"`, or `"anti-PD-1/anti-PD-L1"` are grouped under:
+- Treatments such as `anti-PD-1`, `anti-PD-L1`, or `anti-PD-1/anti-PD-L1` are grouped under:
   ```
   PD-(L)1 or PD-1/PD-L1
   ```
 
-- Combination therapies involving both PD-(L)1 and CTLA4 (typically containing the keyword `"combo"`) are categorized as:
+- Combination therapies involving both PD-(L)1 and CTLA4 (typically containing the keyword `combo`) are categorized as:
   ```
   IO+combo
   ```
