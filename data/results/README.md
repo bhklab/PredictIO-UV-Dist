@@ -23,12 +23,14 @@ The folder structure reflects a **federated analysis design**, where local resul
 │   └── ICB_Miao1/
 │
 └── central/         # Aggregated meta-analysis results across all centers
+```
 
+---
 
-## Notes
+## Data Privacy and Governance Notes
 
-- Local directories contain only **de-identified, derived results** (e.g., gene signature scores and summary statistics).
-- **No raw data or patient-level clinical data is stored or shared** in the `/results/local/` directories.
-- Each center performs local computation independently to preserve **data privacy and compliance** with institutional and ethical regulations.
-- The `central/` directory includes only aggregated results (e.g., effect sizes) suitable for meta-analysis.
-- File names are standardized for reproducibility and traceability.
+- Local result folders contain only **derived, de-identified outputs** such as gene signature scores and summary statistics.
+- **No raw expression data or patient-level clinical variables** are stored or shared in the `/results/local/` directory.
+- This structure supports a **privacy-preserving, federated analysis framework** aligned with ethical, institutional, and data governance requirements.
+- The `/results/central/` directory includes only aggregated results (e.g., logHR, logOR) from multiple centers and is suitable for downstream meta-analysis.
+- All result files are version-controlled and named consistently to support traceability and reproducibility.
