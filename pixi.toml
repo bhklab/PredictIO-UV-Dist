@@ -51,9 +51,8 @@ bioconductor-survcomp = "*"
 damply = ">=0.10.0, <0.11"
 
 [activation.scripts]
-# Install GitHub package (PredictioR) from a specific commit
 post-setup = [
-  'Rscript -e "remotes::install_github(\'bhklab/PredictioR\', ref = \'46a2708fc7455a4cd064334b3de2407c7c82db73\')"'
+  "Rscript -e \"remotes::install_github('bhklab/PredictioR', ref = '46a2708fc7455a4cd064334b3de2407c7c82db73')\""
 ]
 
 [pypi-dependencies]
