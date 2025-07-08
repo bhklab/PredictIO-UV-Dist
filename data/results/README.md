@@ -24,7 +24,7 @@ The folder structure reflects a **federated analysis design**, where local resul
 │
 └── central/         # Aggregated meta-analysis results across all centers
 
----
+
 ## Notes
 
 - Local directories contain only **de-identified, derived results** (e.g., gene signature scores and summary statistics).
