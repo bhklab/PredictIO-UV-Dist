@@ -1,8 +1,8 @@
 # Distributed univariable predictive modelling for Immuno-Oncology response
 
-**Authors:** [Farnoosh Abbas Aghababazadeh](https://github.com/RibaA)
+**Authors:** [Farnoosh Abbas Aghababazadeh](https://github.com/RibaA), [Nasim Bondar Sahebi](https://github.com/sogolsahebi)
 
-**Contact:** [farnoosh.abbasaghababazadeh@uhn.ca](mailto:farnoosh.abbasaghababazadeh@uhn.ca)
+**Contact:** [farnoosh.abbasaghababazadeh@uhn.ca](mailto:farnoosh.abbasaghababazadeh@uhn.ca),  [nasim.bondarsahebi@uhn.ca](mailto:nasim.bondarsahebi@uhn.ca)
 
 **Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.
 
