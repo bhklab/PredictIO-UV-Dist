@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This directory is reserved for **immutable raw data files** that serve as the original input to the analysis pipeline. These files are not tracked by Git and must be obtained separately to ensure full reproducibility.
+This directory is reserved for **immutable raw data files** that serve as the original input to the distributed univariable analysis pipeline. These files are not tracked by Git and must be obtained separately to ensure full reproducibility.
 
 ---
 
