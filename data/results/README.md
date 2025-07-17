@@ -19,8 +19,11 @@ The folder structure reflects a **federated analysis design**, where local resul
 /results/
 ├── local/           # Results from individual centers
 │   ├── ICB_Gide/
-│   ├── ICB_VanAllen/
-│   └── ICB_Miao1/
+│   ├── ICB_Hugo/
+│   ├── ICB_Liu/
+|   ├── ICB_Miao1/
+│   ├── ICB_Riaz/
+│   └── ICB_VanAllen/
 │
 └── central/         # Aggregated meta-analysis results across all centers
 ```
