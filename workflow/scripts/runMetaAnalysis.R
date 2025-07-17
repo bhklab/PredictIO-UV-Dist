@@ -20,6 +20,7 @@
 library(PredictioR)
 library(meta)
 library(dplyr)
+library(here)
 library(data.table)
 library(Hmisc)
 
@@ -159,13 +160,11 @@ geneSig1 <- unique(pcor$geneSig1)
 
 meta.cor <- lapply(1:length(geneSig1), function(i){
   
-  print(i)
   df <- pcor[pcor$geneSig1 == geneSig1[i], ]
   geneSig2 <- unique(df$geneSig2)
   
   res <- lapply(1:length(geneSig2), function(j){
     
-    print(j)
     sub.df <- df[df$geneSig2 == geneSig2[j], ]
     
     if(geneSig2[j] == geneSig1[i]){
@@ -256,8 +255,7 @@ df <- res.logreg
 signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
-  
-  print(j)
+
   res <- metafun(coef = df[df$Gene == signature[j], "Coef"],
                  se = df[df$Gene == signature[j], "SE"],
                  study  = df[df$Gene == signature[j], "Study"],
@@ -291,7 +289,6 @@ signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
   
-  print(j)
   res <- metafun(coef = df[df$Gene == signature[j], "Coef"],
                  se = df[df$Gene == signature[j], "SE"],
                  study  = df[df$Gene == signature[j], "Study"],
@@ -325,7 +322,6 @@ signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
   
-  print(j)
   res <- metafun(coef = df[df$Gene == signature[j], "Coef"],
                  se = df[df$Gene == signature[j], "SE"],
                  study  = df[df$Gene == signature[j], "Study"],
@@ -358,8 +354,6 @@ df <- res.logreg
 signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
-  
-  print(j)
   
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
@@ -435,8 +429,6 @@ signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
   
-  print(j)
-  
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
     
@@ -510,8 +502,6 @@ df <- res.pfs
 signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
-  
-  print(j)
   
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
@@ -587,8 +577,6 @@ signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
   
-  print(j)
-  
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
     
@@ -663,8 +651,6 @@ signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
   
-  print(j)
-  
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
     
@@ -738,8 +724,6 @@ df <- res.pfs
 signature <- unique(df$Gene)
 
 AllGeneSig_meta <- lapply(1:length(signature), function(j){
-  
-  print(j)
   
   sub_df <- df[df$Gene == signature[j], ]
   if( nrow(sub_df) >= 3){
