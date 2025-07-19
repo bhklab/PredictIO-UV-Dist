@@ -47,7 +47,11 @@ pixi install
 
 ## Nextflow Installation
 
-**Nextflow must be installed separately from Pixi** — see the [Nextflow Setup Guide](https://www.nextflow.io/docs/latest/install.html)
+Nextflow must be installed separately from Pixi(version **25.04.6** or higher) — see the [Nextflow Setup Guide](https://www.nextflow.io/docs/latest/install.html)
+
+```
+nd use pixi run -- ./nextflow run workflow/scripts/main.nf
+``` 
 
 ## Repository Structure
 
