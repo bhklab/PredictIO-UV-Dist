@@ -44,6 +44,11 @@ cd predictio-uv-dist
 # Install dependencies via Pixi
 pixi install
 ```
+
+## Nextflow Installation
+
+**Nextflow must be installed separately from Pixi** — see the [Nextflow Setup Guide](https://www.nextflow.io/docs/latest/install.html)
+
 ## Repository Structure
 
 ```
@@ -63,4 +68,6 @@ predictio-uv-dist/
 Full documentation, including usage instructions, data setup, config templates, and pipeline stages, is available at:
 
 🔗 [https://bhklab.github.io/predictio-uv-dist](https://github.com/bhklab/PredictIO-UV-Dist)
+
+
 
