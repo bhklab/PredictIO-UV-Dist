@@ -44,6 +44,16 @@ cd predictio-uv-dist
 # Install dependencies via Pixi
 pixi install
 ```
+
+## Nextflow Installation
+
+Nextflow must be installed separately from Pixi(version **25.04.6** or higher) — see the [Nextflow Setup Guide](https://www.nextflow.io/docs/latest/install.html)
+
+```
+cd workflow/
+pixi run -- ../nextflow run scripts/main.nf
+``` 
+
 ## Repository Structure
 
 ```
@@ -51,9 +61,9 @@ predictio-uv-dist/
 ├── config/           # YAML config files for each dataset and center
 ├── data/             # Raw, processed, and results directories
 ├── workflow/         # Scripts and Nextflow pipeline for analysis
-├── docs/             # MkDocs documentation 
-├── pixi.toml         # Pixi environment specification
-└── README.md         # # Project overview and setup instructions
+├── docs/             # MkDocs-based project documentation
+│   └── README.md     # Documentation index and setup instructions
+└── pixi.toml         # Pixi environment specification
 ```
 
 ---
@@ -62,5 +72,7 @@ predictio-uv-dist/
 
 Full documentation, including usage instructions, data setup, config templates, and pipeline stages, is available at:
 
-🔗 [https://bhklab.github.io/predictio-uv-dist](https://bhklab.github.io/predictio-uv-dist)
+🔗 [https://bhklab.github.io/predictio-uv-dist](https://github.com/bhklab/PredictIO-UV-Dist)
+
+
 
