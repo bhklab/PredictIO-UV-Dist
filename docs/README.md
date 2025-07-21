@@ -61,9 +61,9 @@ predictio-uv-dist/
 
 ## Documentation
 
-Full documentation, including usage instructions, data setup, config templates, and pipeline stages, is available at:
+Full documentation, including usage instructions, data setup, config templates, and pipeline stages, will be available in the `docs/` folder or via published GitHub Pages.
 
-🔗 [https://bhklab.github.io/predictio-uv-dist](https://github.com/bhklab/PredictIO-UV-Dist)
+Start by downloading and organizing the raw input datasets as described in [`data/rawdata/README.md`](https://github.com/bhklab/PredictIO-UV-Dist/blob/main/data/rawdata/README.md).
 
-
-
+For data download and processing, please refer to the univariable repository:  
+🔗 [https://github.com/bhklab/PredictIO-UV-Dist](https://github.com/bhklab/PredictIO-UV-Dist)
