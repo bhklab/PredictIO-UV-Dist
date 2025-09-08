@@ -2,12 +2,6 @@
 
 ## Purpose
 
-# Scripts Directory
-
-# Scripts Directory
-
-## Purpose
-
 This directory provides **modular R scripts** that implement a **federated, privacy-preserving pipeline** for univariable analysis of immunotherapy outcomes.  
 The workflow evaluates associations between transcriptomic signatures and clinical endpoints across multiple centers while keeping patient-level data local.
 
