@@ -2,18 +2,30 @@
 
 ## Purpose
 
-This directory contains **modular, reusable R scripts** that support a **distributed, privacy-preserving analysis pipeline** for evaluating univariable associations between transcriptomic signatures and immunotherapy outcomes across multiple centers.
+# Scripts Directory
 
-The scripts are designed to:
+# Scripts Directory
 
-- Perform local modeling independently at each participating center
-- Extract **de-identified summary statistics** (e.g., logHR, logOR, correlation)
-- Support **centralized meta-analysis** at an integration node
-- Enable publication-ready visualizations from integrated results (e.g., heatmap, forestplot)
+## Purpose
+
+This directory provides **modular R scripts** that implement a **federated, privacy-preserving pipeline** for univariable analysis of immunotherapy outcomes.  
+The workflow evaluates associations between transcriptomic signatures and clinical endpoints across multiple centers while keeping patient-level data local.
+
+Scripts are organized into two parts:
+- **Local (per-center) analysis** — runs at each site to generate summary statistics
+- **Central (aggregator) analysis** — combines results from all sites into a meta-analysis
+
+The entire workflow is orchestrated by **Nextflow** (`main.nf`), ensuring scalability, reproducibility, and compatibility across computing environments. Execution has been validated on **Code Ocean**.
+
+### Key Capabilities
+- Run analyses independently at each center without sharing raw data
+- Extract only **de-identified summary statistics** (e.g., logHR, logOR, correlations)
+- Perform **centralized meta-analysis** across centers
+- Generate publication-ready outputs (e.g., heatmaps, forest plots)
 
 ---
 
-## Key Scripts (`workflow/scripts/`)
+## Local Scripts (`workflow/scripts/local/`)
 
 - `runSigAnalysis.R`  
   Executes local univariable signature analysis at each center. Computes signature scores using GSVA, weighted mean, or IPS, and assesses associations with:
@@ -21,11 +33,25 @@ The scripts are designed to:
   - Progression-Free Survival (PFS)
   - Binary response (e.g., clinical benefit)
 
+- `runProcData.R`  
+  Prepares input data for local analysis.  
+  - Normalizes expression matrices  
+  - Formats clinical variables  
+  - Ensures consistent input for `runSigAnalysis.R`
+
+---
+
+## Central Scripts (`workflow/scripts/central/`)
+
 - `runMetaAnalysis.R`  
   Integrates summary statistics across centers using fixed/random effects meta-analysis. Outputs include pooled effect sizes, confidence intervals, p-values, heterogenity, and FDR-adjusted p-values.
 
 - `visualization.R`  
   Generates figures (e.g., forest plots, volcano plots, heatmaps) from aggregated results, highlighting reproducible and center-specific associations.
+
+---
+
+## Pipeline Orchestration (`main.nf`)
 
 - `main.nf`  
   A Nextflow pipeline that orchestrates local analyses and central aggregation, enabling scalable, parallel, and reproducible execution across diverse computing environments. The pipeline was executed using the Code Ocean platform to ensure portability and reproducibility. 
