@@ -1,38 +1,48 @@
 # config_local.yaml
 
-# Study-specific identifiers
-study_icb: "ICB_Gide" # ICB_<author or study name>
-cancer_type: "Melanoma"
+# =========================
+# Study & Cohort Metadata
+# =========================
+study_icb: "ICB_Gide"          # e.g., ICB_Gide
+cancer_type: "Melanoma"        # e.g., Melanoma
+treatment_type: "PD-(L)1"      # e.g., PD-(L)1, CTLA-4, combo
 
-# Treatment type (can be changed based on your cohort)
-# Examples: "PD-1/PD-L1", "CTLA-4", "IO+combo"
-treatment_type: "PD-(L)1"
+# =========================
+# File & Directory Settings
+# =========================
+dir_in: "data/procdata"             # Folder containing input .rda file
+dir_out: "data/results/local"       # Folder to save all output .rda files
 
-# Input/output directories
-dir_in: "data/procdata"     # Processed input .rda file location
-dir_out: "data/results/local"     # Output results directory for this center
+# Object names inside the loaded .rda file
+objects:
+  expr: "dat$ICB"
+  signature: "dat$signature"
+  signature_info: "dat$sig.info"
 
-# Input data object names in .rda file
-expr: "dat$ICB"
-signature: "dat$signature"
-signature_info: "dat$sig.info"
-
-# Signature scoring settings
+# =========================
+# Signature Scoring Settings
+# =========================
 signature_scoring:
-  missing.perc: 0.5
-  const.int: 0.001
-  n.cutoff: 15
-  sig.perc: 0.8
+  missing.perc: 0.5       # Max % of missing genes allowed in signature
+  const.int: 0.001        # Constant added to avoid log(0)
+  n.cutoff: 15            # Minimum samples required for analysis
+  sig.perc: 0.8           # Required % of genes present to compute score
 
-# Logistic regression parameters
+# =========================
+# Logistic Regression Settings
+# =========================
 logreg:
- n0.cutoff: 3
- n1.cutoff: 3
+  n0.cutoff: 3            # Minimum number of non-responders
+  n1.cutoff: 3            # Minimum number of responders
 
-# Output filenames (saved under dir_out)
+# =========================
+# Output File Name Suffixes
+# (Filenames will be prepended with study + cancer + treatment)
+# =========================
 output_files:
   scores: "sig_score.rda"
   correlation: "sig_pcor.rda"
   survival_os: "sig_os.rda"
   survival_pfs: "sig_pfs.rda"
   logreg_response: "sig_logreg.rda"
+  
