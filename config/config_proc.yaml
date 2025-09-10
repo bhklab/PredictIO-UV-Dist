@@ -1,14 +1,16 @@
 # config_proc.yaml
 
-# Study-specific identifiers
-study_icb: "ICB_Gide" # ICB_<author or study name>
-cancer_type: "Melanoma"
+# =========================
+# Study & Cohort Metadata
+# =========================
+study_icb: "ICB_Gide"          # e.g., ICB_Gide
+cancer_type: "Melanoma"        # e.g., Melanoma
+treatment_type: "PD-(L)1"      # e.g., PD-(L)1, CTLA-4, combo
 
-# Treatment type (can be changed based on your cohort)
-# Examples: "PD-1/PD-L1", "CTLA-4", "IO+combo"
-treatment_type: "PD-(L)1"
+# =========================
+# File & Directory Settings
+# =========================
+dir_in: "data/rawdata"         # Folder containing raw .rds files
+dir_out: "data/procdata"       # Folder to save processed .rda output
 
-# Input/output directories
-dir_in: "data/rawdata"     # raw input .rds file location
-dir_out: "data/procdata"     # Processed input .rda file location
 
