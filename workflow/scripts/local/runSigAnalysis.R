@@ -242,7 +242,7 @@ if(length(remove) > 0){
   
 }
 
-save(geneSig.score, file=file.path(dir, paste(study_icb, "sig_score.rda", sep = "_")))
+save(geneSig.score, file=file.path(dir, paste(study_icb, cancer_type, treatment_type, "sig_score.rda", sep = "_")))
 
 ############################################################
 ## Pearson Correlation analysis
@@ -254,7 +254,7 @@ cor.val <- list ("r" = fit$r,
                  "p" = fit$P)
 
 names(cor.val) <- rep(study_icb, 3)
-save(cor.val, file = file.path(dir, paste(study_icb , "sig_pcor.rda", sep = "_")))
+save(cor.val, file = file.path(dir, paste(study_icb, cancer_type, treatment_type, "sig_pcor.rda", sep = "_")))
 
 #########################################################
 ## Association with OS
@@ -279,7 +279,7 @@ res.os <- lapply(1:nrow(geneSig.score), function(k){
 res.os <- do.call(rbind, res.os)
 res.os$FDR <- p.adjust(res.os$Pval, method="BH")
 
-save(res.os, file = file.path(dir, paste(study_icb , "sig_os.rda", sep = "_")))
+save(res.os, file = file.path(dir, paste(study_icb, cancer_type, treatment_type, "sig_os.rda", sep = "_")))
 
 #########################################################
 ## Association with PFS
@@ -304,7 +304,7 @@ res.pfs <- lapply(1:nrow(geneSig.score), function(k){
 res.pfs <- do.call(rbind, res.pfs)
 res.pfs$FDR <- p.adjust(res.pfs$Pval, method="BH")
 
-save(res.pfs, file = file.path(dir, paste(study_icb , "sig_pfs.rda", sep = "_")))
+save(res.pfs, file = file.path(dir, paste(study_icb, cancer_type, treatment_type, "sig_pfs.rda", sep = "_")))
 
 #########################################################
 ## Association with response
@@ -329,4 +329,4 @@ res.logreg <- lapply(1:nrow(geneSig.score), function(k){
 res.logreg <- do.call(rbind, res.logreg)
 res.logreg$FDR <- p.adjust(res.logreg$Pval, method="BH")
 
-save(res.logreg, file = file.path(dir, paste(study_icb , "sig_logreg.rda", sep = "_")))
+save(res.logreg, file = file.path(dir, paste(study_icb, cancer_type, treatment_type, "sig_logreg.rda", sep = "_")))
