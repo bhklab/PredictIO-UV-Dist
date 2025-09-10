@@ -68,18 +68,22 @@ Signatures are typically loaded from a curated `.rda` file or fetched from:
 
 ---
 
-## Code Ocean Capsules
+## Code Ocean Capsules (OSL Setup)
 
 This pipeline is deployed via **Code Ocean capsules** to ensure portability and reproducibility.  
 
-- **Local Capsules (per-center analysis)**  
-  Each capsule runs `runSigAnalysis.R` on a specific dataset.  
+- **Local Node Capsule (per-cancer & per-treatment)**  
+  This capsule performs `runSigAnalysis.R` on a specific dataset.  
+  The output is a set of intermediate `.rda` files saved under `data/results/local/`.
   
-  - Gide melanoma cohort — [DOI: 10.xxxx/codeocean.gide](https://doi.org/10.xxxx/codeocean.gide)  
+  - Gide melanoma cohort — [DOI: 10.xxxx/codeocean.gide](https://doi.org/10.xxxx/codeocean.gide)
 
-- **Central Capsule (meta-analysis & visualization)**  
-  Runs `runMetaAnalysis.R` and `runVisualizationAnalysis.R` to integrate outputs across all centers.  
+- **Aggregation Node Capsule (meta-analysis & visualization)**  
+  This capsule collects all outputs from the local node and performs centralized meta-analysis and visualization using `runMetaAnalysis.R` and `runVisualizationAnalysis.R`.  
+
   - Central aggregator — [DOI: 10.xxxx/codeocean.central](https://doi.org/10.xxxx/codeocean.central)
+
+ **Note:** We do not deploy one capsule per cohort (e.g., Gide, Riaz, etc.) to avoid clutter and confusion in OSL. Instead, all combinations are handled through parameterized runs of the Local Node.
 
 ---
 
