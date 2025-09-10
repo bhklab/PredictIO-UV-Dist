@@ -1,29 +1,48 @@
-# -----------------------------------------------------------
-# Signature Analysis Script
-#
 # Description:
-# This script loads configuration parameters from `config_local.yaml`
-# and performs signature-based analyses on a processed dataset.
+# This script performs signature-based analysis on pre-processed 
+# immunotherapy datasets. It calculates gene signature scores and 
+# evaluates their associations with clinical outcomes.
 #
-# Specifically, it:
-#   - Computes gene signature scores (GSVA, ssGSEA, Weighted Mean, etc.)
-#   - Calculates pairwise correlations among signatures
-#   - Assesses association of signature scores with clinical outcomes:
-#       * Overall Survival (OS, Cox)
-#       * Progression-Free Survival (PFS, Cox)
-#       * Binary response (via logistic regression)
+# Required Inputs:
+#   - Processed .rda file (must include):
+#       * Normalized gene expression matrix (TPM format, SummarizedExperiment)
+#       * Gene signature list (e.g., IO, TME)
+#       * Signature metadata (including scoring method)
 #
-# Requirements:
-#   - Processed data (.rda) containing:
-#       * Normalized expression matrix (TPM and SummarizedExperiment)
-#       * Gene signatures list (IO and TME)
-#       * Signature metadata (method, etc.)
+# User-defined parameters (passed as command line arguments):
+#   1. study_icb       – Unique study identifier (e.g., ICB_Gide)
+#   2. cancer_type     – Cancer type (e.g., Melanoma)
+#   3. treatment_type  – Treatment name (e.g., PD-1/PD-L1)
 #
-# Intended use:
-#   - To be executed independently by individual centers/nodes 
-#     on their local processed data
+# Analyses performed:
+#   - Compute gene signature scores using:
+#       * GSVA
+#       * ssGSEA
+#       * Weighted Mean
+#       * Other algorithm-specific methods
+#   - Correlation analysis between signature scores (Pearson)
+#   - Association with:
+#       * Overall Survival (OS) – Cox model
+#       * Progression-Free Survival (PFS) – Cox model
+#       * Binary response – Logistic regression
 #
-# Config file: config/config_local.yaml
+# Output:
+#   - Signature scores, correlation matrix, and clinical associations
+#     are saved in the /results directory.
+#   - Filenames are tagged with the study ID, cancer type, and treatment 
+#     to support stratified analyses across subgroups.
+#
+# Usage:
+#   Rscript signature_analysis.R <study_icb> <cancer_type> <treatment_type>
+#
+# Example:
+#   Rscript signature_analysis.R ICB_Gide Melanoma PD-1/PD-L1
+#
+#   If the study includes multiple treatments (e.g., PD-1/PD-L1 and combo),
+#   run the script separately for each:
+#
+#     Rscript signature_analysis.R ICB_Gide Melanoma PD-1/PD-L1
+#     Rscript signature_analysis.R ICB_Gide Melanoma combo
 # -----------------------------------------------------------
 #############################################################
 # Load libraries
@@ -33,37 +52,31 @@ library(survival)
 library(GSVA)
 library(dplyr)
 library(data.table)
-library(Hmisc)
-library(yaml)
 library(MultiAssayExperiment)
+library(Hmisc)
 
 ###########################################################
-## Set up working directory and study configuration
+## Set up directory
 ###########################################################
-# Load configuration file
-config <- yaml::read_yaml("config/config_local.yaml")
 
-dir_in <- config$dir_in # "data/procdata"
-
-# create output directory for each dataset or node
-dir_out <- file.path(config$dir_out, config$study_icb) # "data/results/local/<study_icb>"
-if (!dir.exists(dir_out)) {
-dir.create(dir_out, recursive = TRUE, showWarnings = FALSE)
-}
-
-study_icb <- config$study_icb # "ICB_Gide"
-cancer_type <- config$cancer_type # "Melanoma"
-treatment_type <- config$treatment_type # "PD-(L)1"  (Other options include: CTLA-4, IO+combo, etc.)
+dir <- "/results"
 
 ############################################
 ## Load data
 ############################################
-input_file <- file.path(dir_in, paste0(study_icb, "__", cancer_type, "__", treatment_type, ".rda"))
-load(input_file)
+data.files <- list.files("/data")
+
+# get command line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+study_icb <- args[1]
+load(file.path("/data", grep("\\.rda$", data.files, value = TRUE)))
 
 expr <- dat$ICB
 signature <- dat$signature
 signature_info <- dat$sig.info
+cancer_type <- args[2]
+treatment_type <- args[3]
 
 ##################################################################
 ## Compute signature score
@@ -229,7 +242,7 @@ if(length(remove) > 0){
   
 }
 
-save(geneSig.score, file=file.path(dir_out, paste(study_icb , "sig_score.rda", sep = "_")))
+save(geneSig.score, file=file.path(dir, paste(study_icb, "sig_score.rda", sep = "_")))
 
 ############################################################
 ## Pearson Correlation analysis
@@ -241,7 +254,7 @@ cor.val <- list ("r" = fit$r,
                  "p" = fit$P)
 
 names(cor.val) <- rep(study_icb, 3)
-save(cor.val, file = file.path(dir_out, paste(study_icb , "sig_pcor.rda", sep = "_")))
+save(cor.val, file = file.path(dir, paste(study_icb , "sig_pcor.rda", sep = "_")))
 
 #########################################################
 ## Association with OS
@@ -266,7 +279,7 @@ res.os <- lapply(1:nrow(geneSig.score), function(k){
 res.os <- do.call(rbind, res.os)
 res.os$FDR <- p.adjust(res.os$Pval, method="BH")
 
-save(res.os, file = file.path(dir_out, paste(study_icb , "sig_os.rda", sep = "_")))
+save(res.os, file = file.path(dir, paste(study_icb , "sig_os.rda", sep = "_")))
 
 #########################################################
 ## Association with PFS
@@ -291,7 +304,7 @@ res.pfs <- lapply(1:nrow(geneSig.score), function(k){
 res.pfs <- do.call(rbind, res.pfs)
 res.pfs$FDR <- p.adjust(res.pfs$Pval, method="BH")
 
-save(res.pfs, file = file.path(dir_out, paste(study_icb , "sig_pfs.rda", sep = "_")))
+save(res.pfs, file = file.path(dir, paste(study_icb , "sig_pfs.rda", sep = "_")))
 
 #########################################################
 ## Association with response
@@ -316,6 +329,4 @@ res.logreg <- lapply(1:nrow(geneSig.score), function(k){
 res.logreg <- do.call(rbind, res.logreg)
 res.logreg$FDR <- p.adjust(res.logreg$Pval, method="BH")
 
-save(res.logreg, file = file.path(dir_out, paste(study_icb , "sig_logreg.rda", sep = "_")))
-
-
+save(res.logreg, file = file.path(dir, paste(study_icb , "sig_logreg.rda", sep = "_")))
