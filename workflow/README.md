@@ -68,6 +68,25 @@ Signatures are typically loaded from a curated `.rda` file or fetched from:
 
 ---
 
+## Code Ocean Capsules
+
+This pipeline is deployed via **Code Ocean capsules** to ensure portability and reproducibility.  
+
+- **Local Capsules (per-center analysis)**  
+  Each capsule runs `runSigAnalysis.R` and `runProcData.R` on a specific dataset.  
+  Example capsules:  
+  - Gide melanoma cohort — [DOI: 10.xxxx/codeocean.gide](https://doi.org/10.xxxx/codeocean.gide)  
+  - Limagne1 lung cohort — [DOI: 10.xxxx/codeocean.limagne1](https://doi.org/10.xxxx/codeocean.limagne1)  
+  - Riaz melanoma cohort — [DOI: 10.xxxx/codeocean.riaz](https://doi.org/10.xxxx/codeocean.riaz)  
+  - Van Allen melanoma cohort — [DOI: 10.xxxx/codeocean.vanallen](https://doi.org/10.xxxx/codeocean.vanallen)  
+  - … full list available in [LOCAL_CAPSULES.md](docs/LOCAL_CAPSULES.md)
+
+- **Central Capsule (meta-analysis & visualization)**  
+  Runs `runMetaAnalysis.R` and `runVisualizationAnalysis.R` to integrate outputs across all centers.  
+  - Central aggregator — [DOI: 10.xxxx/codeocean.central](https://doi.org/10.xxxx/codeocean.central)
+
+---
+
 ## Local Configuration and Directory Structure
 
 Each center should:
