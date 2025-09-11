@@ -68,20 +68,22 @@ Signatures are typically loaded from a curated `.rda` file or fetched from:
 
 ---
 
-## Code Ocean Capsules (OSL Setup)
+## Code Ocean Capsules
 
 This pipeline is deployed via **Code Ocean capsules** to ensure portability and reproducibility.  
 
 - **Local Node Capsule (per-cancer & per-treatment)**  
   This capsule performs `runSigAnalysis.R` on a specific dataset.  
-  The output is a set of intermediate `.rda` files saved under `data/results/local/`.
+  The output is a set of intermediate `.rda` files containing association results and are saved under `data/results/local/` and can be transferred to the central integration capsule for federated meta-analysis.
   
-  - Gide melanoma cohort — [DOI: 10.xxxx/codeocean.gide](https://doi.org/10.xxxx/codeocean.gide)
+  Users can apply this capsule to their own datasets by providing gene expression and clinical   response inputs in the expected format 
+  — [Federated Network Biomarker Discovery in Immuno-Oncology (Per-Center)](https://codeocean.com/capsule/4295565/tree)
 
 - **Aggregation Node Capsule (meta-analysis & visualization)**  
   This capsule collects all outputs from the local node and performs centralized meta-analysis and visualization using `runMetaAnalysis.R` and `runVisualizationAnalysis.R`.  
 
-  - Central aggregator — [DOI: 10.xxxx/codeocean.central](https://doi.org/10.xxxx/codeocean.central)
+  All results are based on aggregated outputs rather than raw patient-level data, ensuring privacy preservation while enabling generalizable biomarker discovery across cancer types and treatment settings 
+  — [Federated network Immuno-Oncology Meta-analysis](https://codeocean.com/capsule/5912730/tree)
 
  **Note:** We do not deploy one capsule per cohort (e.g., Gide, Riaz, etc.) to avoid clutter and confusion in OSL. Instead, all combinations are handled through parameterized runs of the Local Node.
 
