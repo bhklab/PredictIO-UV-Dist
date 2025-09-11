@@ -4,7 +4,7 @@
 
 **Contact:** [farnoosh.abbasaghababazadeh@uhn.ca](mailto:farnoosh.abbasaghababazadeh@uhn.ca),  [nasim.bondarsahebi@uhn.ca](mailto:nasim.bondarsahebi@uhn.ca)
 
-**Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.
+**Description:** A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response. This pipeline enables center-specific analyses while preserving data privacy and provides a central integration workflow for federated meta-analysis.
 
 --------------------------------------
 
@@ -20,12 +20,31 @@
 
 ## Project Overview
 
-This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to Immuno-Oncology (IO) therapies. It supports:
+This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to IO therapies. It supports:
 
-- Center-specific signature scoring and modeling (e.g., OS, PFS, response)
-- Strict data privacy (no sharing of raw or patient-level data)
-- Centralized meta-analysis of effect sizes across datasets
-- Modular, reproducible pipeline built with **Pixi**, **Nextflow**, and **R**
+- **Per-center analysis**: signature scoring and univariable association with outcomes (OS, PFS, response)  
+- **Privacy preservation**: no sharing of raw or patient-level data  
+- **Central aggregation**: meta-analysis of effect sizes across centers  
+- **Reproducibility**: modular pipeline using **Pixi**, **Nextflow**, and **R**
+
+---
+
+## Code Ocean Capsules
+
+This workflow is also available as reproducible [Code Ocean capsules](https://codeocean.com):
+
+- **Local Node Capsule (per-center analysis)**  
+  Run locally at each center to generate summary association results without sharing raw data.  
+  🔗 [Federated Network Biomarker Discovery in Immuno-Oncology (Per-Center)](https://codeocean.com/capsule/4295565/tree)
+
+- **Aggregation Node Capsule (meta-analysis & visualization)**  
+  Collects outputs from local nodes and performs centralized meta-analysis and visualization.  
+  🔗 [Federated network Immuno-Oncology Meta-analysis
+](https://codeocean.com/capsule/5912730/tree)
+
+Both capsules will be published in the **Code Ocean Open Science Library (OSL)** upon peer-reviewed acceptance, ensuring long-term reproducibility.
+
+---
 
 ## Set Up
 
