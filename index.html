@@ -44,6 +44,8 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#project-overview">Project Overview</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-ocean-capsules">Code Ocean Capsules</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#set-up">Set Up</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
@@ -98,7 +100,7 @@
                 <h1 id="distributed-univariable-predictive-modelling-for-immuno-oncology-response">Distributed univariable predictive modelling for Immuno-Oncology response</h1>
 <p><strong>Authors:</strong> <a href="https://github.com/RibaA">Farnoosh Abbas Aghababazadeh</a>, <a href="https://github.com/sogolsahebi">Nasim Bondar Sahebi</a></p>
 <p><strong>Contact:</strong> <a href="mailto:farnoosh.abbasaghababazadeh@uhn.ca">farnoosh.abbasaghababazadeh@uhn.ca</a>,  <a href="mailto:nasim.bondarsahebi@uhn.ca">nasim.bondarsahebi@uhn.ca</a></p>
-<p><strong>Description:</strong> A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response, enabling analysis across multiple centers without sharing patient-level data.</p>
+<p><strong>Description:</strong> A distributed framework for univariable predictive modeling of Immuno-Oncology (IO) response. This pipeline enables center-specific analyses while preserving data privacy and provides a central integration workflow for federated meta-analysis.</p>
 <hr />
 <p><a href="https://github.com/prefix-dev/pixi"><img alt="pixi-badge" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json&amp;style=flat-square" /></a>
 <a href="https://github.com/astral-sh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&amp;style=flat-square" /></a>
@@ -109,13 +111,31 @@
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/bhklab/predictio-uv-dist?style=flat-square" />
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/bhklab/predictio-uv-dist?style=flat-square" /></p>
 <h2 id="project-overview">Project Overview</h2>
-<p>This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to Immuno-Oncology (IO) therapies. It supports:</p>
+<p>This repository implements a distributed framework for evaluating the predictive value of RNA-based signatures in response to IO therapies. It supports:</p>
 <ul>
-<li>Center-specific signature scoring and modeling (e.g., OS, PFS, response)</li>
-<li>Strict data privacy (no sharing of raw or patient-level data)</li>
-<li>Centralized meta-analysis of effect sizes across datasets</li>
-<li>Modular, reproducible pipeline built with <strong>Pixi</strong>, <strong>Nextflow</strong>, and <strong>R</strong></li>
+<li><strong>Per-center analysis</strong>: signature scoring and univariable association with outcomes (OS, PFS, response)  </li>
+<li><strong>Privacy preservation</strong>: no sharing of raw or patient-level data  </li>
+<li><strong>Central aggregation</strong>: meta-analysis of effect sizes across centers  </li>
+<li><strong>Reproducibility</strong>: modular pipeline using <strong>Pixi</strong>, <strong>Nextflow</strong>, and <strong>R</strong></li>
 </ul>
+<hr />
+<h2 id="code-ocean-capsules">Code Ocean Capsules</h2>
+<p>This workflow is also available as reproducible <a href="https://codeocean.com">Code Ocean capsules</a>:</p>
+<ul>
+<li>
+<p><strong>Local Node Capsule (per-center analysis)</strong><br />
+  Run locally at each center to generate summary association results without sharing raw data.<br />
+  🔗 <a href="https://codeocean.com/capsule/4295565/tree">Federated Network Biomarker Discovery in Immuno-Oncology (Per-Center)</a></p>
+</li>
+<li>
+<p><strong>Aggregation Node Capsule (meta-analysis &amp; visualization)</strong><br />
+  Collects outputs from local nodes and performs centralized meta-analysis and visualization.<br />
+  🔗 <a href="https://codeocean.com/capsule/5912730/tree">Federated network Immuno-Oncology Meta-analysis
+</a></p>
+</li>
+</ul>
+<p>Both capsules will be published in the <strong>Code Ocean Open Science Library (OSL)</strong> upon peer-reviewed acceptance, ensuring long-term reproducibility.</p>
+<hr />
 <h2 id="set-up">Set Up</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <p>Pixi is required to run this project.
@@ -195,5 +215,5 @@ pixi install
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-09-11 19:22:30.858246+00:00
+Build Date UTC : 2025-09-11 19:30:55.301774+00:00
 -->
