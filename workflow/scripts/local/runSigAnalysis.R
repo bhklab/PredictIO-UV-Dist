@@ -1,3 +1,4 @@
+# -------------------------------------------------------------------------------
 # Description:
 # This script performs signature-based analysis on pre-processed 
 # immunotherapy datasets. It calculates gene signature scores and 
@@ -43,7 +44,7 @@
 #
 #     Rscript signature_analysis.R ICB_Gide Melanoma PD-1/PD-L1
 #     Rscript signature_analysis.R ICB_Gide Melanoma combo
-# -----------------------------------------------------------
+# -------------------------------------------------------------------------------
 #############################################################
 # Load libraries
 #############################################################
